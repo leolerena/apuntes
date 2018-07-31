@@ -1,0 +1,284 @@
+\documentclass[11pt]{article}
+
+%%%%%%%%%%%%%% LATEX SAMPLE FILE %%%%%%%%%%%%%%%%
+% A line which starts with a % sign
+% is called a COMMENT. It is IGNORED
+% by the LaTeX processor.
+
+% Include math
+\usepackage{amsmath,amsthm,amssymb}
+% Include links
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{pifont}
+
+%%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
+% Let's define some theorem environments
+% To use later in the paper
+\theoremstyle{plain} % other options: definition, remark
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem*{props}{Propiedades}
+\newtheorem{coro}[teorema]{Corolario}
+% By including [theorem], the lemma follows the numbering of theorem
+% e.g. Thm 1, Lemma 2, Thm 3, Thm 4, \dots
+\theoremstyle{definition}
+\newtheorem*{definicion}{Definici\'{o}n} % the star prevents numbering
+
+% Remarks
+\theoremstyle{remark}
+\newtheorem{obs}{Obs}
+\newtheorem*{demo}{Demo}
+
+
+
+%%%%%%%%%%%%%%  PAGE SETUP %%%%%%%%%%%%%%%%%
+% LaTeX has big default margins
+% The following sets them to 1in
+\usepackage[margin=1.5in]{geometry}
+
+% The following sets up some headers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Resumen de Proba} % Left Header
+\rhead{\thepage} % Right Header
+\cfoot{} % Center Foot (empty)
+
+
+
+
+
+
+%%%%%%%%%%%%% SHORTCUTS %%%%%%%%%%%%%%%%%%%%
+% You can define your own shortcuts too.
+% Examples of custom commands
+\def\Om{\Omega}
+\def\C{\mathbb{C}}
+\def\Z{\mathbb{Z}}
+\def\Q{\mathbb{Q}}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}} 
+\def\P{\mathbb{P}}
+\def\va{variable aleatoria }
+\def\vas{variables aleatorias }
+\def\blue{\textcolor{blue}}
+\renewcommand\qed{\ding{110}}
+\newcommand{\X}{\overline{X}}
+
+
+\begin{document}
+
+
+\title{Resumen de Proba}
+\author{Leopoldo Lerena}
+\date{Julio 2018}
+\maketitle
+
+\begin{abstract}
+	Este es un resumen muy abreviado de la cursada de Probabilidad y Estad\'{i}stica de la licenciatura en Cs. Matem\'{a}ticas de UBA.
+\end{abstract}
+
+
+\tableofcontents
+
+
+\eject
+
+
+
+\bigskip 
+
+
+
+
+
+
+
+
+
+
+\section{Definiciones basicas}
+\label{sec:discretos}
+% ^ Now we can refer to this
+
+De ahora en m\'as $X$ es un conjunto cualesquiera.
+
+\begin{definicion}
+	Una \blue{$\sigma$ - \'algebra} $\Omega$ es un subconjunto de $\cal{P}$$(X)$ que cumple las siguientes propiedades.
+	\begin{itemize}
+		\item Sea $(A_n)_{n \in \N} \in \Omega$ luego $\cup_{n \in \N} A_{n} \in \Om$
+		\item Si $A \in \Om \implies X\setminus A \in \Om$
+	\end{itemize}
+\end{definicion}
+
+\begin{definicion}
+	Una \blue{funci\'on de probabilidad}  es una funci\'on $\mathbb P: \Om \to \R_{\geq 0}$ que cumple las siguientes condiciones.
+	\begin{itemize}
+		\item  $\P(X) = 1$
+		\item si $A \subset B \implies \P(A) \leq \P(B)$
+		\item si $A \cap B = \emptyset \implies \P(A \cup B) = \P(A) + \P(B)$
+	\end{itemize}
+\end{definicion}
+
+\begin{definicion}
+	Definimos un \blue{espacio de probabilidad} como un triple $\left( X,\Om,\mathbb P\right) $. 
+\end{definicion}
+
+
+\begin{teorema}
+	\label{teo:contproba}
+	[Continuidad de la probabilidad]
+	Sea $(A_n)_{n \in \N}$ una sucesi\'on creciente de eventos.
+	\[ \ \lim_{n \to \infty} \P(A_n) = \P(\cup_{n \in \N} A_n). \]
+	An\'alogamente si $(B_n)_{n \in \N}$ una sucesi\'on decreciente de eventos.
+	\[ \ \lim_{n \to \infty} \P(B_n) = \P(\cap_{n \in \N} B_n). \]
+\end{teorema}
+
+\begin{teorema}
+	[F\'ormula de inclusi\'on-exclusi\'on]
+	Sean $\left( X,\Om,\mathbb P\right) $, $A_1 \dots A_n$ eventos.
+	\begin{equation*}
+		\P \left( \cup_{i=1 \dots n} A_{i}\right)  = \sum_{k=1}^{n} \sum_{\substack{\mathcal{J}\in \{1,\dots,n\},\\\#(\mathcal{(J)} = k)}}	\left(-1 \right)^{k+1} \P\left( \cap_{i \in \mathcal J} \right)  		
+	\end{equation*}
+\end{teorema}
+\bigskip
+\section{Independencia de variables aleatorias}
+
+\begin{definicion}
+	Calculamos la \blue{probabilidad condicional} de un evento $A$ dado $B$ de la siguiente manera.
+	\[\P(A|B) = \left(\dfrac{\P(A\cap B)}{\P(B)} \right) \]
+\end{definicion}
+
+\begin{teorema}
+	\label{teo:total}
+	[Regla de la probabilidad total]
+	Sea $\{B_i\}$ una partici\'on  en conjuntos disjuntos de $X$. Podemos recuperar la probabilidad de un evento $A$ cualesquiera por la siguiente formula
+	\[ \P(A) = \sum_{i}\P(A|B_i)\P(B_i)\]
+\end{teorema}
+
+\begin{teorema}
+	[Formula de Bayes]
+	Es una formula para obtener la probabilidad de $B_i$ condicionada con $A$ si tenemos la otra, es decir la de $A$ condicionada con $B_i$. Consideramos los $\{B_i\}$ de \ref{teo:total}.
+	\[\P(B_i|A) = \dfrac{\P(B_i|A)}{\sum_{i}\P(A|B_i)\P(B_i)}\]
+\end{teorema}
+
+\begin{demo}
+	Es una consecuencia r\'apida de \ref{teo:total}.
+\end{demo}
+\bigskip
+\section{Funciones de distribuci\'on}
+
+\begin{definicion}
+	Una \blue{funcion de distribucion} de una v.a $X$, es una funci\'on $F:\R \to [0,1]$ definida de la siguiente manera.
+	\[F(x) = \P \left( X^{-1}(-\infty,x) \right)\]
+\end{definicion}
+
+\begin{props}
+	La funci\'on de distribuci\'on $F$ cumple lo siguiente.
+	\begin{enumerate}
+		\item $F$ es mon\'otona no decreciente 
+		\item $\lim_{x \to \infty} F(x) = 1 $ y $\lim_{x \to - \infty} F(x) = 0$
+		\item $F$ es continua a derecha.
+	\end{enumerate}
+\end{props}
+
+\begin{demo}
+Estas propiedades son bastante visibles si uno recuerda los gr\'aficos de estas funciones.
+	\begin{enumerate}
+		\item Inmediata dado que la probabilidad es una funci\'on aditiva de conjuntos.
+		\item Esto se sigue de que $X^{-1}(-\infty, x) \nearrow \Om$ y dado que tenemos el resultado \ref{teo:contproba}.
+		\item Ac\'a de nuevo volvemos a usar el resultado \ref{teo:contproba} pero en este caso para conjuntos decrecientes. El claro contraejemplo para ver que no puede resultar continua est\'a dado por la distribuci\'on de una \va discreta en alg\'un punto que tenga probabilidad positiva.
+	\end{enumerate}
+\end{demo}
+
+\begin{obs}
+	$F$ es continua $\iff \P(X=x) = 0 \hskip 1cm \forall x \in \R$ 
+\end{obs}
+
+\bigskip
+
+\section{Distribuci\'ones importantes}
+
+\begin{definicion}
+	\label{def:permem}
+	Decimos que una \va exhibe la propiedad de \blue{p\'erdida de memoria} cuando el tiempo de espera de un evento no le afecta cu\'anto tiempo se haya esperado. Esto es si $i,j \in \R$
+	\[\P(X>i+j | X > i) = \P(X>j)  \]
+\end{definicion}
+
+\begin{teorema}
+	[P\'erdida de memoria]
+	Sea $X$ una \va continua. Vale la siguiente caracterizaci\'on de las \va exponenciales.
+	\[X \text{tiene p\'erdida de memoria} \iff X \sim \mathcal{E}(\lambda) \]
+\end{teorema}
+
+\begin{demo}
+	
+	La vuelta requiere expandir la cuenta de la p\'erdida de memoria y todo se sigue. Hay que tener cuidado en la justificaci\'on con las indicadoras.
+	
+	La ida consiste en un argumento m\'as delicado con respecto a las propiedades que definen a la funci\'on $e^x$. 
+	
+	Si definimos $g(t) \coloneqq \P(X>t) $. Como tiene p\'erdida de memoria sabemos que en particular vale la siguiente igualdad.
+	\[g(t+s) = g(t)g(s)\]
+	
+	A partir de esa igualdad, lo que podemos hacer es demostrar para los $\frac{p}{q} \in \Q$ (por medio de inducci\'on en $q$) que valen las siguientes igualdades.
+	\begin{align*}
+		g(\frac{p}{q})^q &= g(p) \\
+		g(\frac{p}{q}) &= g(1)^{\frac{p}{q}}
+	\end{align*} 
+	
+	Veamos cuanto vale la funci\'on en un racional cualesquiera, tomando logaritmo y despu\'es elevandolo, nos queda lo siguiente
+	
+	\begin{align*}
+		g(\frac{p}{q}) &= e^{\log(g(\frac{p}{q}))} \\
+		&= e^{\frac{p}{q} \log(g(1))} 
+	\end{align*}
+	
+	Entonces ya estamos. LLamamos $\lambda \coloneqq g(1)$ y como la $g(t) = e^{\lambda t} \forall t \in \Q$ esto implica que por ser una funci\'on continua la igualdad vale para todos los n\'umeros reales.
+	
+	\qed
+		
+	
+\end{demo}
+
+\begin{obs}
+	Este mismo resultado vale para \vas discretas si en vez de considerar las exponenciales tomamos su contraparte, las geom\'etricas. La cuenta es an\'aloga.
+\end{obs}
+
+
+
+\bigskip
+
+\section{Vectores aleatorios}
+
+\begin{definicion}
+	Un \blue{vector aleatorio} es una \va que va a parar a $\R^d$. Muchas definiciones y propiedades son las extensiones naturales de lo visto para una \va.
+\end{definicion}
+
+\begin{teorema}
+	[Independencia de vectores aleatorios]
+	Las siguientes condiciones son equivalentes para que un vector aleatorio tenga componentes independientes. En este caso lo escribo para un vector puramente discreto pero vale para vectores puramente continuos. Si $\overline{X} = \left( X_1, \dots , X_d \right)$
+	\begin{enumerate}
+		\item Las componentes del vector $\X$ son independientes.
+		\item $p_{\X} (x_1,\dots,x_d) = p_{X_1}(x_1) \dots p_{X_d}(x_d)$.
+		\item  Se factoriza la funcion de distribuci\'on en funciones que dependen de una \'unica variable.
+		\item Se factoriza la funci\'on de probabilidad puntual en funciones que dependen de una \'unica variable.
+		
+	\end{enumerate}
+\end{teorema}
+
+\begin{demo}
+	El teorema tiene bastantes implicaciones directas, solo hay una que requiere un poco m\'as de trabajo y es la siguiente.\\
+	$4 \implies 2$.\\
+	Para esta demostraci\'on si sabemos que 
+	\[p_{\X} (x_1,\dots,x_d) = q_{1}(x_1) \dots q_{d}(x_d)\]
+	Primero podemos ver que $p_{X_1}(x_) = q_{1}(x_1)$. Esto sale de que si tomamos $x \in R_{x_1}$ y nos queda libre en el rango de las otras coordenadas obtenemos una seria convergente y estrictamente positiva.
+	\[c_i \coloneqq \sum_{(x_2, \dots, x_d) \in R_{x_1} \times \dots \times R_{x_d}} q_{2}(x_2) \dots q_{d}(x_d)  \]
+	Y finalmente para chequear  que $\dfrac{1}{c_1\dots c_d}q_{1}(x_1) \dots q_{d}(x_d) = p_{X_{1}}(x_1) \dots p_{X_d}(x_d)$ nos quedar\'ia ver que $\dfrac{1}{c_1\dots c_d}=1$
+\end{demo}
+
+\bigskip
+
+\section{Esperanza}
+
+\end{document}
