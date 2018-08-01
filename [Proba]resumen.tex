@@ -12,6 +12,8 @@
 \usepackage{color}
 \usepackage{mathtools}
 \usepackage{pifont}
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
 
 %%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
 % Let's define some theorem environments
@@ -54,6 +56,7 @@
 % You can define your own shortcuts too.
 % Examples of custom commands
 \def\Om{\Omega}
+\def\E{\mathbb{E}}
 \def\C{\mathbb{C}}
 \def\Z{\mathbb{Z}}
 \def\Q{\mathbb{Q}}
@@ -65,6 +68,9 @@
 \def\blue{\textcolor{blue}}
 \renewcommand\qed{\ding{110}}
 \newcommand{\X}{\overline{X}}
+\newcommand{\cs}{\overset{c.s}{\to}}
+\newcommand{\proba}{\overset{P}{\to}}
+\newcommand{\dist}{\overset{D}{\to}}
 
 
 \begin{document}
@@ -102,7 +108,7 @@
 \label{sec:discretos}
 % ^ Now we can refer to this
 
-De ahora en m\'as $X$ es un conjunto cualesquiera.
+De ahora en m\'as $X$ es un conjunto cualesquiera. En esta parte están las definiciones más básicas del objeto de estudio de la materia: los espacios de probabilidad. Aparecen también algunos resultados que en sí no son propios de la probabilidad sino que valen para todos los espacios de medida pero resultan muy útiles en subsequentes demostraciones.
 
 \begin{definicion}
 	Una \blue{$\sigma$ - \'algebra} $\Omega$ es un subconjunto de $\cal{P}$$(X)$ que cumple las siguientes propiedades.
@@ -128,7 +134,7 @@ De ahora en m\'as $X$ es un conjunto cualesquiera.
 
 \begin{teorema}
 	\label{teo:contproba}
-	[Continuidad de la probabilidad]
+	
 	Sea $(A_n)_{n \in \N}$ una sucesi\'on creciente de eventos.
 	\[ \ \lim_{n \to \infty} \P(A_n) = \P(\cup_{n \in \N} A_n). \]
 	An\'alogamente si $(B_n)_{n \in \N}$ una sucesi\'on decreciente de eventos.
@@ -144,6 +150,8 @@ De ahora en m\'as $X$ es un conjunto cualesquiera.
 \end{teorema}
 \bigskip
 \section{Independencia de variables aleatorias}
+
+Es la primer idea básica de la materia. Es de vital importancia para la resolución de problemas más aún que para demostrar otros resultados más avanzados. Definiciones y teoremas fáciles pero de gran importancia.
 
 \begin{definicion}
 	Calculamos la \blue{probabilidad condicional} de un evento $A$ dado $B$ de la siguiente manera.
@@ -167,7 +175,10 @@ De ahora en m\'as $X$ es un conjunto cualesquiera.
 	Es una consecuencia r\'apida de \ref{teo:total}.
 \end{demo}
 \bigskip
+
 \section{Funciones de distribuci\'on}
+
+Es un nuevo enfoque para ver las \vas, nos permite \textit{clasificarlas} con respecto a su distribución de la proba. Hay muchos tipos de distribuciones fundamentales pero no voy a escribir todas sino algunos resultados de caracterización que resultan importantes. 
 
 \begin{definicion}
 	Una \blue{funcion de distribucion} de una v.a $X$, es una funci\'on $F:\R \to [0,1]$ definida de la siguiente manera.
@@ -198,7 +209,13 @@ Estas propiedades son bastante visibles si uno recuerda los gr\'aficos de estas 
 
 \bigskip
 
-\section{Distribuci\'ones importantes}
+\subsection{Distribuci\'ones importantes}
+
+\begin{definicion}
+	
+	A partir de una distribuci\'on $F$ podemos armarnos una \va que tenga esa misma distribuci\'on. Para eso tomamos una $U \sim \mathcal{U}[0,1] $ y decimos que \[X \coloneqq F^{-1}(U)\]
+	es la \blue{inversa generalizada} de $F$
+\end{definicion}
 
 \begin{definicion}
 	\label{def:permem}
@@ -223,15 +240,15 @@ Estas propiedades son bastante visibles si uno recuerda los gr\'aficos de estas 
 	
 	A partir de esa igualdad, lo que podemos hacer es demostrar para los $\frac{p}{q} \in \Q$ (por medio de inducci\'on en $q$) que valen las siguientes igualdades.
 	\begin{align*}
-		g(\frac{p}{q})^q &= g(p) \\
-		g(\frac{p}{q}) &= g(1)^{\frac{p}{q}}
+		g\left( \frac{p}{q}\right) ^q &= g\left( p\right)  \\
+		g\left( \frac{p}{q}\right)  &= g\left( 1\right) ^{\frac{p}{q}}
 	\end{align*} 
 	
 	Veamos cuanto vale la funci\'on en un racional cualesquiera, tomando logaritmo y despu\'es elevandolo, nos queda lo siguiente
 	
 	\begin{align*}
-		g(\frac{p}{q}) &= e^{\log(g(\frac{p}{q}))} \\
-		&= e^{\frac{p}{q} \log(g(1))} 
+		g\left( \frac{p}{q}\right)  &= e^{\log\left( g\left( \frac{p}{q}\right) \right) } \\
+		&= e^{\frac{p}{q} \log\left( g\left( 1\right) \right) } 
 	\end{align*}
 	
 	Entonces ya estamos. LLamamos $\lambda \coloneqq g(1)$ y como la $g(t) = e^{\lambda t} \forall t \in \Q$ esto implica que por ser una funci\'on continua la igualdad vale para todos los n\'umeros reales.
@@ -272,13 +289,214 @@ Estas propiedades son bastante visibles si uno recuerda los gr\'aficos de estas 
 	$4 \implies 2$.\\
 	Para esta demostraci\'on si sabemos que 
 	\[p_{\X} (x_1,\dots,x_d) = q_{1}(x_1) \dots q_{d}(x_d)\]
-	Primero podemos ver que $p_{X_1}(x_) = q_{1}(x_1)$. Esto sale de que si tomamos $x \in R_{x_1}$ y nos queda libre en el rango de las otras coordenadas obtenemos una seria convergente y estrictamente positiva.
+	Primero podemos ver que $p_{X_1}(x) = c_{1}q_{1}(x_1)$. Esto sale de que si tomamos $x \in R_{x_1}$ y nos queda libre en el rango de las otras coordenadas obtenemos una seria convergente y estrictamente positiva.
 	\[c_i \coloneqq \sum_{(x_2, \dots, x_d) \in R_{x_1} \times \dots \times R_{x_d}} q_{2}(x_2) \dots q_{d}(x_d)  \]
-	Y finalmente para chequear  que $\dfrac{1}{c_1\dots c_d}q_{1}(x_1) \dots q_{d}(x_d) = p_{X_{1}}(x_1) \dots p_{X_d}(x_d)$ nos quedar\'ia ver que $\dfrac{1}{c_1\dots c_d}=1$
+	Y finalmente para chequear  que $\dfrac{1}{c_1\dots c_d}q_{1}(x_1) \dots q_{d}(x_d) = p_{X_{1}}(x_1) \dots p_{X_d}(x_d)$ nos quedar\'ia ver que $\dfrac{1}{c_1\dots c_d}=1$ \qed
 \end{demo}
+
+El siguiente teorema es el mismo de toda la vida. Las hipótesis son las mismas y la demostración es idéntica si uno no se quiere poner tan riguroso con las integrales.
+
+\begin{teorema}
+	[Cambio de variables]
+	Sea $\overline{X} = \left( X_1, \dots , X_d \right)$ un vector aleatorio absolutamente continuo con densidad $f_{\overline{X}}$, $G \subseteq \R^d$ abierto tal que concentra la proba de $\overline{X}$ y $g:G \to U \subseteq \R^d$ que cumple:
+	\begin{itemize}
+		\item $G = \dot{\bigcup} G_i$
+		\item  $g_{i}:G_{i} \to U$ biyectivas
+	\end{itemize}
+	Entonces lo que vale es lo siguiente, la \va $Y \coloneqq g(\overline{X})$ es abs. cont. con función de densidad
+	\[f_Y = \sum f_{\overline{X}} \circ g_{i} ^{-1} |Dg_i|^{-1} \chi_U \]
+\end{teorema}
+
+
 
 \bigskip
 
 \section{Esperanza}
+
+\subsection{Esperanza condicional}
+
+\subsection{Varianza y covarianza}
+
+\subsection{Desigualdades clásicas}
+
+\bigskip
+\section{Convergencias de v.a}
+
+En esta parte hay muchos resultados importantes de convergencia de \vas. Los resultados se corresponden con las implicaciones de los distintos tipos de convergencia, con resultados que lo relacionan con convergencia de series que pueden ser más fáciles de manejar y con los grandes teoremas de proba como la ley de los grandes números fuerte.
+
+Primero veamos unas condiciones equivalentes a las distintas convergencias. En el caso de la convergencia c.s podemos llevarla a una de series que es más fuerte pero más fácil de manejar.
+
+\begin{teorema}
+	\label{teo:seriecs}
+	Las siguiente condición va a implicar convergencia c.s,
+	
+		 Si $\forall \epsilon > 0$ vale que $\sum_{n} \P(|X_n - X|>\epsilon) < + \infty \implies$
+		 $X_n \cs X$
+\end{teorema}
+
+\begin{demo}
+	La idea es directa. Suponemos por absurdo que no hay convergencia c.s entonces tomamos un $\overline{\omega} \in \Om$ tal que $\P(\overline{\omega}) > 0$ y que no converje en este evento. Si tomamos el $\epsilon$ de la no-convergencia del evento, obtenemos que la serie para ese $\epsilon$ diverge. Esta es una contradicción, por lo tanto $X_n \cs X$.
+	\qed
+\end{demo}
+
+Queremos demostrar una equivalencia de convergencia en distribución. Para eso requerimos de un lema medio molesto que por lo tanto omito su demostración pero es un lema muy importante de esta parte de convergencias.
+
+\begin{lema}
+	[Skorohod]
+\end{lema}
+
+ 
+\begin{teorema}
+	
+\end{teorema}
+
+\subsection{Implicaciones de convergencias}
+
+\begin{props}
+	Estas implicaciones valen siempre sin pedir más. \[ X_n \cs X \implies X_n \proba X \implies X_n \dist X \]
+\end{props}
+
+El siguiente resultado nos da una pequeña vuelta a la primer implicación.
+
+\begin{teorema}
+	\[ X_n \proba X \implies X_{n_{k}} \cs X  \]
+\end{teorema}
+
+\begin{demo}
+	La idea es tomar una sucesión que esté acotada por algo sumable ya que tenemos el resultado más fuerte \ref{teo:seriecs}. Tomamos la siguiente sucesión indexada por $k$.
+	\[ \P  \left( \left\lbrace \omega \in \Om : |X_n - X| > \frac{1}{k} \right\rbrace \right) < \frac{1}{2^k}  \]	\qed
+\end{demo}
+
+\medskip
+
+El siguiente resultado aunque no lo parezca es un resultado muy importante ya que sirve como resultado previo a la ley de los grandes números débil. Es una vuelta de cuándo vale que conv. en dist. implica conv. en proba.
+\begin{teorema}
+	[Slutsky]
+	$X_n \dist X , Y_n \dist c$. Entonces vale lo siguiente.
+	\begin{enumerate}
+		\item $Y_n \proba c$
+		\item $X_n + Y_n \dist X + Y$
+		\item $X_{n}Y_{n} \dist XY$ 
+	\end{enumerate}
+\end{teorema}
+
+El siguiente teorema es muy útil en las demostraciones y no es muy complicado de demostrar.
+
+\begin{teorema}
+	[Borel-Cantelli]
+	Sea $A_n$ una flia de eventos, $A \coloneqq \bigcap_{n \in \N} \bigcup_{k \geq n} A_n$
+	\begin{enumerate}
+		\item Si $\sum \P (A_n) < + \infty \implies \P(A)=0$ 
+		\item Si $A_n$ son independientes y $\sum \P (A_n) < + \infty \implies \P(A)=1$ 
+	\end{enumerate}	
+\end{teorema}
+
+\begin{demo}
+	\begin{enumerate}
+		Ambas demostraciones son directas salvo la segunda que requiere un poco de ingenio al final.
+		\item Sabemos que 
+		\begin{align*}
+			\P (A) = \P (\bigcap_{n \in \N} \bigcup_{k \geq n} A_n) &\leq \P(\bigcup_{k \geq n} A_n) \\
+			&\leq \sum_{k \geq n} \P(A_n)
+		\end{align*}
+Y esta es la cola de una serie conv. entonces se va a 0.
+
+		\item Quiero ver que $\P(\Om \setminus A) = 0$.
+		
+		Para eso vemos que $\Om \setminus A =  \bigcup_{k \in n} \bigcap_{n \geq k} \Om \setminus A_n$. Como es una unión creciente tenemos continuidad del límite de las probabilidades \ref{teo:contproba}.
+		\[ \P\left( \Om \setminus A \right)  = \lim_{k \to \infty} \P (\bigcap_{n \geq k} \Om \setminus A_n)  \]
+		Y ahora usamos la hipótesis fundamental de la independencia para escribir todo como un producto y con un poco de magia de análisis encontrar lo que buscabamos \footnote{Usamos la siguiente desigualdad, término a término, que sale del polinomio de Taylor: $$1-x \leq e^{-x}$$}.
+		\begin{align*}
+			\lim_{k \to \infty} \P (\bigcap_{n \geq k} \Om \setminus A_n) &=\prod_{n \geq k} 1 - \P(A_n) \\
+			& \leq e^{-\sum_{n \geq k} \P(A_n)}  = 0 \\
+		\end{align*}
+		Y como vimos que $\P(\Om \setminus A) = 0 \implies \P(A)=1$ \qed
+	\end{enumerate}
+\end{demo}
+
+El siguiente resultado nos da una  condición suficiente para que las esperanzas converjan.
+
+\begin{teorema}
+	[Convergencia acotada]
+	Sean $X_n \proba X$ y $|X_n|,|X| < M$ entonces vale que
+	\[ \E(X_n) \to \E(X) \]
+\end{teorema}
+
+\begin{demo}	
+	Queremos ver que $\E(|X-X_n|) \to 0$. La idea simplemente es dividirla en dos partes a esta esperanza. 
+	\[\E(|X-X_n|) = \E(|X-X_n|)\chi_{\left\lbrace |X-X_n|<\epsilon\right\rbrace } + \E(|X-X_n|)\chi_{\left\lbrace |X-X_n|>\epsilon\right\rbrace }\]
+	
+	Sabiendo que tenemos convergencia en proba podemos acotar a $\P(|X-X_n|>\epsilon$) por un $\delta$ adecuado. Entonces el primer sumando lo acotamos por arriba por $\epsilon$ y al segundo sumando por  $2M\delta$. \qed
+\end{demo}
+
+
+
+\subsection{Ley fuerte de los grandes números}
+
+Hay dos versiones del teorema. La fuerte nos da la convergencia casi segura y la demostración es un poco más difícil ya que no se usa funciones características. 
+
+\begin{teorema}
+	[Ley fuerte de los grandes números]
+	$\overline{X}_{n} \overset{c.s}{\to} \mu$	
+\end{teorema}
+
+\begin{demo}
+	Vamos a usar fuertemente el siguiente resultado \ref{teo:seriecs}.
+	
+	Miramos la sucesión $Y_n = X_n - \mu$ tal que $\E(Y_n) = 0$. Lo que vamos a hacer es ver qué pasa con el término n-ésimo de la serie. Este término acotandolo con Markov nos da lo siguiente.
+	$\P(\overline{Y}_{n} > \epsilon) \leq \dfrac{\sigma}{n\epsilon^2}$. Pero esta cota no es buena porque la seria harmónica diverge. Para eso miramos cuando tomamos los índices como $n^2$ y en tal caso sí converge, porque nos queda $\P(\overline{Y}_{n^2} > \epsilon) \leq \dfrac{\sigma}{n^2\epsilon^2}$. Entonces vamos a intercalar esto que sabemos que converge (viejo truco de análisis) y hacer algunas manipulaciones cuidadosas para llegar a lo que queríamos.
+	
+	Recapitulando, queremos acotar $|\overline{Y}_{k}|$. Para eso notamos lo siguiente
+	\begin{align*}
+		\left|\overline{Y}_{k}\right|  &= \left| \dfrac{S_k}{k}\right|  \\
+		&= \left| \dfrac{S_k - S_{n(k)^2} + S_{n(k)^2}}{k}\right| \\
+		& \leq \left| \dfrac{S_k - S_{n(k)^2}}{k}\right|  + \left|  \dfrac{S_{n(k)^2}}{k}\right| 
+	\end{align*}	
+	
+Lo que sabemos es que el segundo sumando nos da una serie convergente, por lo tanto nos tenemos que encargar del primer sumando únicamente.
+
+Para el primer sumando miramos al conjunto \\
+$A_\epsilon = \{ \omega \in \Om : \left| \dfrac{S_k (\omega) - S_{n(k)^2}(\omega)}{k} \right| \geq \epsilon \}$ y usamos la desigualdad de Markov para encontrar una cota que va a ser de $o(\frac{1}{n^2})$. Una vez encontrada la cota hay que terminar la demostración verificando que la serie es convergente pero estas son cuentas usuales.
+\qed
+\end{demo}
+
+\bigskip
+\section{Funciones caracteristicas}
+
+Las funciones características son como una funciones generatrices de las \vas. La idea es codificar bastante información en estos objetos y que sean más fáciles de manejar que las variables aleatorias. Transforman el problema de la convergencia en proba y distribución que suelen ser difíciles de manejar en un problema de convergencia de funciones en c.t.p. Todo esto se debe al gran teorema de \textbf{Paul Levy} \ref{teo:levy} que permite dar lindas demostraciones de teoremas fundamentales de convergencia como el \textit{TCL}. Lamentablemente este teorema no es nada trivial de demostrar, requeriría varios lemas e introducir incluso un tema nuevo. Por lo tanto si confíamos en que es cierto podemos gozar de cortas demostraciones para teoremas importantes.
+
+\begin{definicion}
+	La \blue{función caracteristica} de una \va $X$ es la siguiente función. 
+	\[ \phi_{X}(t) \coloneqq \E(e^{itX}) \]
+\end{definicion}
+
+\begin{teorema}
+	\label{teo:levy}
+	[Paul Levy]
+	Las siguientes afirmaciones son equivalentes.
+	\begin{enumerate}
+		\item $\phi_{n}(t) \to \phi(t)$ c.t.p.
+		\item $X_n \dist X$.
+	\end{enumerate}
+\end{teorema}
+
+\begin{teorema}
+	[Ley de los grandes números débil]
+	$(X_i) $ \vas iid tales que $\E(X_i) = \mu$ entonces $\overline{X_i} \proba \mu$
+\end{teorema}
+
+\begin{teorema}		
+	[Teorema central del límite]
+	
+\end{teorema}
+
+\bigskip
+\section{Estadística}
+
+
+\bigskip
+\section{Procesos de Poisson}
+\bigskip
+\section{Cadenas de Markov}
 
 \end{document}
