@@ -516,7 +516,7 @@ El siguiente resultado aunque no lo parezca es un resultado muy importante ya qu
 	Solo escribo las demostraciones de la primera y la segunda dado que las otras se parecen en esencia a la segunda.
 	\begin{enumerate}
 		\item Queremos escribir la convergencia en proba como una de distribución entonces basta con controlar 
-		\[\P(\left| Y_n -c \right| > \epsilon ) = F_n(c - \epsilon) + 1 - F_n(c - \epsilon) \]
+		\[\P(\left| Y_n -c \right| > \epsilon ) = F_n(c - \epsilon) + 1 - F_n(c + \epsilon) \]
 		donde ambos sumandos tienden a 0 debido a que $X_n \dist c$.
 		
 		\item La demostración es un poco más rebuscada. Vamos a usar fuertemente el resultado \ref{teo:convdist} y acotar con cuidado.
@@ -659,11 +659,24 @@ Una vez demostrado o asumiendo que vale el resultado de Lévy podemos pasar a la
 
 \bigskip
 \section{Estadística}
+En esta sección voy a definir varios conceptos básicos de la estadística. No va a haber demostraciones pero sí descripciones de los métodos y de las definiciones.
 
+Decimos que una \blue{muestra} se corresponde con un vector aleatorio $\overline{X} = (X_1 , \dots , \X_n)$. La idea es a partir de la muestra obtener información de la variable aleatoria $X$. Por ejemplo si queremos saber cual es su valor medio o cualquier otro \blue{parámetro} $\theta$, lo que hacemos es mirar $\overline{\theta}(\overline{X})$ que es una función que va a aproximar a $\theta$. A esta función la llamamos el \blue{estimador}. Decimos que un estimador es \blue{insesgado} si su esperanza es  $\theta$
+\[ \E \left( \overline{\theta}\left(\overline{X}\right) \right)  = \theta \]
+y otra propiedad que nos va a interesar es cuando converge en probabilidad al parámetro y decimos que es \blue{consistente}
+\[ \overline{\theta}\left(\overline{X}\right) \to \theta \]
+Existen dos métodos distintos para poder encontrar buenos estimadores. Uno es el llamado \blue{método de los momentos} que consiste en despejar el estimador del cálculo de los momentos. El otro es el \blue{método de máxima verosimilitud} que consiste en despejar el valor que maximiza la probabilidad de una observación dada.
 
 \bigskip
 \section{Procesos de Poisson}
+
+
+
 \bigskip
 \section{Cadenas de Markov}
+
+Las \blue{cadenas de Markov} son procesos estocásticos $(X_n)$ que toman valores en un conjunto numerable. Si $X_n = x$ la \blue{cadena} está en el estado $x$ o tiempo $k$. La propiedad que define a estas cadenas es que no importa el pasado a la hora de condicionar \footnote{Pensar en el random walk de un borracho que no importan los primeros k pasos sino el último}
+\[ \P\left( X_{k+1}=y | X_{k}=x_k , \dots , X_0 = x_0  \right) = \P \left( X_{k+1}=y |  X_{k}=x_k \right)  \] 
+
 
 \end{document}
