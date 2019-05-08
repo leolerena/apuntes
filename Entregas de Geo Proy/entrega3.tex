@@ -1,0 +1,101 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amssymb}
+% Include links
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{pifont}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Geometría Proyectiva}
+\author{Leopoldo Lerena}
+
+
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\']{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Proy}{\mathbb P ^n (k)}
+\newcommand{\A}{\mathbb A}
+
+
+\title{Tercer entrega.}
+\date{Octubre 2018}
+
+\begin{document}
+	\maketitle
+	
+	
+	\textbf{Plano rectificante.}
+	
+	Sea $\alpha:I \to \R^3$ una curva regular con curvatura y torsión nunca nulas. Denotamos $\{T,N,B\}$ a su triedro de Frenet y el \textit{plano rectificante} es el plano con normal $N$ que pasa por $\alpha$. 
+	
+	Supongamos que todos los planos rectificantes de $\alpha$ están a la misma distancia $c \geq 0$ del origen. Probar que, en los puntos $t \in I$ donde $\left(\dfrac{ \kappa}{\tau}\right)'$ y donde $\langle T(t),\alpha(t) \rangle$ son distintos de 0 vale la siguiente igualdad
+	\[ ||\alpha(t)||^2 = \left(\dfrac{- \tau c - \dfrac{\kappa^2 c}{\tau}  - \dfrac{\kappa}{\tau}}{\left(\dfrac{\kappa}{\tau}\right)'}\right)^2 + c^2 + \left(\dfrac{-\tau c - \dfrac{\kappa^3 c}{\tau^2}  - \dfrac{\kappa^2}{\tau^2}}{\left(\dfrac{\kappa}{\tau}\right)'}\right)^2 .\]
+	
+	
+	\bigskip
+	
+	\textit{Solución.}
+	
+	Lo primero que voy a hacer es reparametrizar la curva por longitud de arco para eventualmente poder usar Frenet-Serret más comodamente. Claramente este resultado no depende de la parametrización de la curva sino más bien de su traza por lo tanto voy a obtener el mismo resultado. Como tanto la curvatura y la torsión son no nulas tengo un triedro de Frenet-Serret.
+	
+	Si llamo al plano rectificante a $\alpha$ en el momento $t$ a $R(t) = \langle N(t),\alpha(t) \rangle $, donde $N(t)$ es el vector del triedro de Frenet-Serret. Que su distancia al origen sea constante, es decir que $d(R(t),0) = c$ para algún $c \in \R_{>0}$ es lo mismo que \footnote{Acá no me queda claro porqué necesariamente es igual a $c$ y no a $-c$, en tal caso los signos me quedan distintos a los pedidos.}
+	\[\langle N(t),\alpha(t) \rangle = c , \hspace{0.75cm} \text{para todo t} \in \R.\]
+	
+	Dado que el triedro de Frenet-Serret es una base ortonormal de $\R^3$ puedo escribir $\alpha(t) = \langle T(t),\alpha(t) \rangle T(t) + \langle N(t),\alpha(t) \rangle N(t) + \langle B(t),\alpha(t) \rangle B(t)$ entonces para calcular su norma basta con tomar el producto interno contra sí mismo y dado que es una base ortonormal lo único que sobrevive es
+	\[ ||\alpha(t)||^2 = \langle T(t),\alpha(t) \rangle^2 + \langle N(t),\alpha(t) \rangle^2 + \langle B(t),\alpha(t) \rangle^2 .\]
+	Por lo tanto me alcanza con calcular $\langle T(t),\alpha(t) \rangle$ y $\langle B(t),\alpha(t) \rangle$. Para eso uso que la distancia al origen de la recta normal es constante y derivando esta igualdad obtengo lo siguiente. Fijado $t$.
+	\begin{align*}
+	\langle N,\alpha \rangle' &= (c)' \\
+	\langle N',\alpha \rangle + \langle N,T \rangle &= 0 .\\
+	\end{align*}
+	Acá utilizo Frenet-Serret para reescribir $N'$ en términos del triedro y que $N$ es ortogonal a $T$.
+		
+	\begin{align*}
+	\langle -\tau B -\kappa T ,\alpha(t) \rangle  &= 0   \\
+	\langle -\tau B, \alpha \rangle   &=  \langle \kappa T ,\alpha \rangle      \\
+	-\tau \langle  B, \alpha \rangle   &= \kappa \langle  T ,\alpha \rangle      \\
+	\end{align*}
+	Con lo cual llego a la siguiente ecuación que me relaciona los coeficientes que busco. 
+	\begin{equation}\label{igualdad}
+	 \langle  B, \alpha \rangle   = - \dfrac{ \kappa}{\tau} \langle  T ,\alpha \rangle.
+	\end{equation}
+	
+	
+	
+	Entonces derivando esta igualdad obtengo lo siguiente.
+	
+	\begin{equation*}
+	\langle  B', \alpha \rangle + \langle  B, T \rangle   = - \left( \dfrac{ \kappa}{\tau}\right)'  \langle  T ,\alpha \rangle + \dfrac{ \kappa}{\tau} \langle  T' ,\alpha \rangle + \dfrac{ \kappa}{\tau} \langle  T ,T \rangle.
+	\end{equation*}
+	 Reacomodando y expandiendo con Frenet-Serret y usando que el triedro es una base ortonormal llego a la igualdad que buscaba. Acá utilizo que $\left(\dfrac{ \kappa}{\tau}\right)' \neq 0$ para poder dividir por eso.
+	 
+	 \begin{align*}
+	 - \tau c   &= - \left( \dfrac{ \kappa}{\tau}\right)'  \langle  T ,\alpha \rangle - \dfrac{ \kappa^2 c}{\tau}  - \dfrac{ \kappa}{\tau}. \\
+	  \left( \dfrac{ \kappa}{\tau}\right)'  \langle  T ,\alpha \rangle &= - \tau c - \dfrac{ \kappa^2 c}{\tau}  - \dfrac{ \kappa}{\tau}. \\
+	   \langle  T ,\alpha \rangle &= \dfrac{- \tau c - \dfrac{ \kappa^2 c}{\tau}  - \dfrac{ \kappa}{\tau}}{\left(\dfrac{ \kappa}{\tau}\right)'}
+	 \end{align*}
+	Volviendo a \ref{igualdad} puedo reemplazar el valor hallado para llegar a que
+	\[ \langle  B, \alpha \rangle = \dfrac{- \tau c - \dfrac{ \kappa^3 c}{\tau^2}  - \dfrac{ \kappa^2}{\tau^2}}{\left(\dfrac{ \kappa}{\tau}\right)'}. \]
+	Juntando todo, esto me dice que
+	\[ ||\alpha(t)||^2 = \left(\dfrac{-\tau c - \dfrac{\kappa^2 c}{\tau}  - \dfrac{\kappa}{\tau}}{\left(\dfrac{\kappa}{\tau}\right)'}\right)^2 + c^2 + \left(\dfrac{-\tau c - \dfrac{\kappa^3 c}{\tau^2}  - \dfrac{\kappa^2}{\tau^2}}{\left(\dfrac{\kappa}{\tau}\right)'}\right)^2 .\]
+	
+	\qed
+	
+	
+\end{document}	

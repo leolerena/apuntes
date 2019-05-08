@@ -1,0 +1,91 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage[top=30pt,left=48pt,right=46pt]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{physics}
+
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\']{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+
+\newcommand{\ti}{\tilde}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Proy}{\mathbb P ^n (k)}
+\newcommand{\A}{\mathbb A}
+
+
+\title{Geometría Proyectiva \\ \large Cuarta entrega.  \\\line(1,0){350}}
+\date{06 de Noviembre}
+
+\begin{document}
+	\maketitle
+	\begin{itemize}
+		\item[a)] Probar que las isometr\'ias de una superficie preservan sus geod\'esicas.
+		
+		\textbf{Solución.}
+		
+		Quiero ver que dada una isometría $f:S \to M$, y una geodésica $\alpha \colon I \to S$, vale que $\beta \coloneqq f(\alpha)$ es una geodésica de $M$. Sea $\varphi \colon U \to S$  la parametrización de la superficie $S$, luego puedo pensar que la geodésica viene dada por la composición con la parametrización, es decir $\alpha(t) = \varphi(u(t),v(t))$. Además observo que por medio de la isometría obtengo una parametrización de la superficie $M$.
+		
+		Para eso voy a usar la definición de geódesica que la relaciona con la primer forma de la superficie. Esto lo hago porque al ser superficies isométricas entre sí resulta que tienen la misma primer forma. Esto es que para todo punto $p \in S$ se cumple que $I^{S}_{p} = I^{M}_{f(p)}$. 
+		
+		Uso que la curva $\alpha$ al ser una geodésica de S cumple la siguiente ecuación.
+		
+		\begin{align*}
+		\dv{}{t}I^{S}\dot \alpha = \frac{1}{2}  \begin{pmatrix}
+		\left\langle I^{S}_{u}\dot\alpha, \dot\alpha \right\rangle \\
+		\left\langle I^{S}_{v}\dot\alpha, \dot\alpha \right\rangle \\
+		\end{pmatrix}
+		\end{align*} 
+		
+		Afirmo que $\beta$ cumple la misma ecuación para la superficie $M$ por lo tanto resulta ser una geodésica. Para eso noto que para cada punto fijo $p=\alpha(t)$ tengo la igualdad de primeras formas fundamentales $I^{M}_{f(p)} = I^{S}_{p}$. Esto se debe a que ambas funciones son iguales en un entorno abierto. Por lo tanto concluyo que si lo restrinjo a los puntos de la curva $\beta(t)$ vale que $I^{M}(\beta) = I^{S}(\beta)$. Ahora que tengo esta igualdad basta derivar para llegar a lo que queríamos pues
+		
+		\begin{align*}
+		\left\langle {I^S_u\dot \beta}{\dot\beta} \right\rangle &= \left\langle  {I^M_u\dot \beta}{\dot \beta} \right\rangle  \\
+		\left\langle {I^S_v\dot \beta}{\dot \beta} \right\rangle &= \left\langle  {I^M_v\dot \beta}{\dot \beta} \right\rangle. 
+		\end{align*}
+		
+		Por lo tanto puedo ver que $\beta$ es una geodésica de $M$ dado que cumple la ecuación de la primer forma.
+		
+		\begin{align*}
+		\dv{}{t}I^{M}\dot \beta \ &= \dv{}{t}I^{S}_{p}\dot \beta \\
+		&= \frac{1}{2}  \begin{pmatrix}
+		\left\langle I^{S}_{u}\dot\beta, \dot\beta \right\rangle \\
+		\left\langle I^{S}_{v}\dot\beta, \dot\beta \right\rangle \\
+		\end{pmatrix}.
+		\end{align*} 
+		
+		\qed
+		
+		\line(1,0){500}
+		
+		\bigskip
+		
+		\item[b)] Sea $S$ una superficie, $f : S \to S$ una isometr\'ia y supongamos que el conjunto de los puntos fijos de $f$ es la traza de una curva regular $\sigma : I \to S$ que es un homeomorfismo con su imagen y est\'a parametrizada por longitud de arco, donde $I$ es un intervalo abierto de $\R$. Probar que $\sigma$ es una geod\'esica.
+		
+		\textbf{Solución.}
+		
+		Para probar que la curva $\sigma$ es una geodésica voy a usar la unicidad de geodésicas que pasan por un punto con una velocidad fijada. Sea $\Sigma \coloneqq \{s \in S: f(s)=s \} \subset S$ o sea el conjunto de los puntos fijos de la isometría $f$, que por hipótesis resulta ser la traza de la curva $\sigma$ regular parametrizada por longitud de arco y homeomorfa con su imagen.
+		
+		Fijado un instante $t$, sea su imagen $p \coloneqq \sigma(t)$ y la velocidad $v \coloneqq \dot\sigma(t)$. Por el teorema de unicidad de geodésicas (localmente) existe una única geodésica $\alpha(t)$ tal que pasa por $p$ con velocidad $v$. Veamos ahora que esta geodésica resulta ser localmente $\sigma$. Para eso notemos que cae en el conjunto $\Sigma$ y que al ser $\sigma$ parametrizada por longitud de arco y homeomorfa con su imagen no queda otra que sean la mismas.
+
+		Dado que $f$ es una isometría esto me dice que $f(\alpha)$ es una geodésica también. Por lo tanto noto que son la misma dado que $f(\alpha)(0)=\alpha(0)=p$. Dado que puedo calcular la derivada de $(f(\alpha))'(0)$ de la siguiente forma $D_pf v = (f(\alpha))'(0)$ . Esta definición no depende la curva elegida mientras tenga velocidad $v$, por lo tanto elijo la curva $\sigma$ tal que $D_pf v = (f(\alpha))'(0) = \dot\sigma(0) = v$. Esto me dice que por unicidad de geodésicas $\alpha = f(\alpha)$. Por lo tanto no queda otra que $\alpha$ sea localmente la geodésica $\sigma$ y por lo tanto queda demostrado que $\sigma$ es una geodésica de la superficie $S$.
+		
+		\qed
+		
+		
+		
+		
+		\line(1,0){500}
+		
+	\end{itemize}
+\end{document}
+

@@ -1,0 +1,144 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage[top=30pt,left=48pt,right=46pt]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+
+
+%%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
+% Let's define some theorem environments
+% To use later in the paper
+\theoremstyle{plain} % other options: definition, remark
+\newtheorem{teorema}{Teorema}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{propo}[teorema]{Proposición}
+\newtheorem*{props}{Propiedades}
+\newtheorem{coro}[teorema]{Corolario}
+\newtheorem*{ej}{Ejercicio}
+% By including [theorem], the lemma follows the numbering of theorem
+% e.g. Thm 1, Lemma 2, Thm 3, Thm 4, \dots
+\theoremstyle{definition}
+\newtheorem*{definicion}{Definici\'{o}n} % the star prevents numbering
+
+\newcommand{\R}{\mathbb R}
+\newcommand{\Proy}{\mathbb P ^n (k)}
+\newcommand{\A}{\mathbb A}
+
+\title{Geometría Proyectiva \\ \large Resolución del segundo parcial.  \\\line(1,0){350}}
+\date{Diciembre 2018}
+\author{Leopoldo Lerena}
+
+\begin{document}	
+	\maketitle
+
+		
+	\begin{ej}[2]
+		Sea $S$ una superficie de revolución suave y $\gamma$ una de sus geodésicas. Denotemos $\rho(t)$ la distancia entre $\gamma(t)$ y el eje de rotación. Sea $\beta(t)$ el ángulo entre la traza de $\gamma(t)$ y el paralelo que pasa por $\gamma(t)$. Demostrar que $\beta(t)\cos(\beta(t))$ debe ser constante.
+		
+	\end{ej}
+
+	\textbf{Solución.}
+	
+	Para la superficie de revolución $S$  uso la parametrización regular $\phi(u,v)=(f(u)\cos v, f(u) \sin v, u)$ con $f>0$ tal que $E=1+ f'(u)$, $G=f(u)^2$ y $F=0$. Luego al ser $\gamma$ una geodésica debe cumplir con el sistema de ecuaciones dado por la primer forma \footnote{Acá todo debería estar evaluado en $t$ pero para que no se complique mucho la notación no lo agrego.}
+	\begin{align}\label{ecu}
+	\frac{\partial}{\partial t}(Eu' + Fv') &=  \dfrac{1}{2}(E_u(u')^2 + 2F_u u'v' +G_u(v')^2) \\
+	\frac{\partial}{\partial t}(Fu' + Gv') &=  \dfrac{1}{2}(E_v(u')^2 + 2F_v u'v' +G_v(v')^2)
+	\end{align}
+	
+	Tal que de \ref{ecu} obtenemos que $\frac{\partial}{\partial t} Gv'= \frac{\partial}{\partial t} f^2(u)v'= 0$. Por lo tanto $f^2(u)v'= c$ una constante.  Entonces sabiendo esto podemos ver que el ángulo $\beta(t)$ que es el ángulo entre el paralelo que tiene como vector tangente a $\phi_v$  y la tangente de la geodésica $\gamma' = \phi_u u' + \phi_v v'$. Que supongo  parametrizada por longitud de arco.
+	Obtengo de la fórmula del coseno que esto es exactamente
+	
+	\begin{equation*}
+	\cos(\beta(t)) = \dfrac{(\phi_u u' + \phi_v v') \cdot \phi_v }{|G|} = \dfrac{Fu' + Gv'}{\sqrt G} = f(u)v'
+	\end{equation*}
+	
+	Como $f(u)=\rho$ dado que $\rho = ||\phi(u,v) - (0,0,u)||=|f(u)|=f(u)$ esto me dice que volviendo a \ref{ecu} obtuvimos lo que quería ver pues 
+	
+	\begin{equation*}
+	\rho \cos(\beta(t)) = f^2(u)v' = c
+	\end{equation*}
+	\qed
+	
+	\line(1,0){500}
+	
+	\bigskip
+	
+	
+	\begin{ej}[3]
+		Sea $S$ una superficie suave. Sea $\gamma:[a,b] \to S$ una línea de curvatura de la superficie parametrizada por longitud de arco. Demostrar que si la curvatura gaussiana es siempre estrictamente positiva o siempre estrictamente negativa luego tenemos la siguiente cota
+		\begin{equation*}
+		|\int_{t_0}^{t_1} \tau(s) ds| \leq \pi
+		\end{equation*} 
+		Para $(t_0,t_1) \subseteq (a,b)$.
+	\end{ej}
+
+	\textbf{Solución.}
+	
+	Lo primero que voy a hacer es escribir la normal de la superficie $n$ en la base del triedro de la curva $\gamma$ dado por $\{T,N,B\}$ porque está parametrizada por longitud de arco. Para eso primero observo que la normal de la superficie al ser ortogonal al espacio tangente de la superficie en particular resulta ser ortogonal a la tangente $T$. Esto me dice que si $(a,b,c)$ son las coordenadas en esta base, resulta que $a=0$. A su vez como tiene norma $1$ resulta que $b^2 +c^2 = 1$. Esto me dice que $b=\cos(\theta(t))$ y $c=\sin(\theta(t))$. Donde $\theta \in (-\frac{\pi}{2},\frac{\pi}{2})$ es el ángulo entre $n$ y $N$ que es una función $C^1$. Como en particular es una línea de curvatura y la curvatura Gaussiana es siempre positiva o negativa, esto me dice que no puede cambiar de signo y por continuidad tener curvatura normal $0$ en algún punto. Por el teorema de Meusnier esto es que el ángulo entre la normal de Frenet-Serret y la de la superficie sea exactamente $\frac{\pi}{2}$ o algún múltiplo entero. 
+	%Acá dudo un poco de esta justificación porque nosotros no vimos tanto de este tema.
+	Derivando una vez obtenemos que
+	
+	\begin{align*}
+	(n(\gamma(t)))' &= (bN + cB)' \\
+	Dn(\gamma(t))\gamma'(t) = k_{i} \gamma' (t) &= b'N + b\tau B -b\kappa T  + c'B - c\tau N \\
+	\end{align*}
+	
+	Esto me dice que dado que $\gamma'$ es paralelo a $T$, si igualo las coordenadas me quedan las siguientes ecuaciones en términos de la torsión y de $b,c$ que ya conozco.
+	
+	\begin{align*}
+	b\tau +c'&=0\\
+	b'- c\tau &=0
+	\end{align*}
+	
+	Como ambas me dan la misma información, esto me dice que en particular 
+	\begin{align*}
+	\tau = \frac{b'}{c} = \frac{-\sin(\theta(t))\theta'(t)}{\sin(\theta(t)} = -\theta'(t)
+	\end{align*}
+	
+	Entonces planteando la integral lo que obtengo es que 
+	\begin{equation*}
+	|\int_{t_0}^{t_1} \tau(s) ds| = |\int_{t_0}^{t_1}-\theta'(t)| = |\theta(t_1) - \theta(t_0)|
+	\end{equation*} 
+	Concluyo que $|\theta(t_1) - \theta(t_0)| \leq \pi$ porque la función $\theta(t)$ está definida en ese intervalo de longitud $\pi$. Por lo tanto resulta que 
+	\begin{equation*}
+	|\int_{t_0}^{t_1} \tau(s) ds| \leq \pi.
+	\end{equation*} 
+	
+	%caso contrario tendría que existe un punto $\gamma(t_0)$ y otro $\gamma(t_1)$ tal que $|\theta(t_1) - \theta(t_0)| = \pi$ por continuidad. En tal caso resultan ser las mismas normales pero con signo opuesto. Esto me diría que en tal caso $Dn(\gamma(t_0))\gamma'(t_0) = k_i \gamma'$ pero que $Dn(\gamma(t_1))\gamma'(t_1) = -k_i \gamma'$. Lo cual diría que la dirección principal cambió de signo pero esto quiere decir que en algún momento la curvatura principal se anuló por continuidad, pero contradice la hipotésis de que la curvatura gaussiana es siempre positiva o siempre negativa. 
+	\qed
+	
+	\line(1,0){500}
+	
+	\bigskip
+	
+
+
+	\begin{ej}[5]
+	Sea $M$ una superficie tal que para todo $p,q \in M$ existe una isometría $f$ tal que $f(p)=q$. Demostrar que $(M,d)$ es un espacio métrico completo. Donde $d$ es la distancia intrinseca.
+	\end{ej}
+	
+	\textbf{Solución.}
+	
+	Para ver que el espacio métrico es completo por Hopf-Rinow me alcanza con ver que se puede extender el dominiio de toda geodésica. Esto es que sea geodésicamente completo.
+	
+	Para eso primero observo que fijado un punto $p \in M$ tal que existe un entorno exponencial $W$ de radio $r>0$. Este entorno es tal que para todo $x,y \in W$ resulta que existe una única geodésica que une a ambos. Luego como existen isometrías entre todos los puntos obtengo que $q \in M$ es tal que tiene un radio exponencial de radio al menos $r$. Esto se debe a que por medio de la isometría $f(p)=q$ obtengo que el entorno exponencial es mapeado en otro entorno exponencial y al ser una isometría resulta que su radio es al menos $r$. Esto me dice que existe un $r>0$ tal que sirve como radio exponencial para todo punto en la superficie.
+	
+	Sea ahora una geodésica $\gamma:(a,b) \to M$. Supongo que $b<\infty$ y quiero ver que la puedo extender. El otro caso es totalmente análogo. Para eso considero una sucesión creciente $t_n \to b$. Como tenemos al menos un mismo radio del entorno exponencial $r$ para todo punto de la superficie, considero algún $N \in \mathbb N$ tal que $t_n > b-r$ para todo $n>N$. Considera la geodésica definida en al menos $(-r,r)$ dada por
+	\[ \mu(s)=Exp_{\gamma(t_{N})}(s\gamma'(t_{N})) \]
+	Por unicidad en este entorno tienen que coincidir $\gamma$ con $\mu$ donde están definidas. Ahora considero $s$ suficientemente grande para que valga la desigualdad $t_N + s > b$, luego estaría extendiendo el dominio de la geodésica al intervalo $(a,t_N+s)$. Lo cual es una contradicción con la maximalidad de $b$. Esto dice que es geodésicamente completo por lo tanto por el teorema de Hopf-Rinow resulta ser una superficie completa como quería ver.
+	
+	%Sea $q =\lim_{t \to b} \gamma(t) $. Si tomo $t$ tal que $d(\gamma(t), q)< r$ luego por lo visto anteriormente como en todo punto de la superficie tengo un entorno exponencial de radio al menos $r$, resulta que voy a poder extender la geodésica desde $\gamma(t)$. Por lo tanto la superficie resulta ser completa.
+	
+	
+	\qed
+	
+	\line(1,0){500}
+	
+	\bigskip
+	
+\end{document}

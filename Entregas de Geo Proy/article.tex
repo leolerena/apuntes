@@ -1,0 +1,182 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Geometría Proyectiva}
+
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+
+\title{Primer entrega.}
+\author{Leopoldo Lerena }
+\date{Septiembre 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Ejercicio 1}
+\subsection*{(a)}
+Quiero descomponer un espacio hiperbólico en una suma de planos hiperbólicos ortogonales entre sí. Acá voy a usar que $b$ es una forma bilineal simétrica. Por lo tanto por el teorema espectral sé que existe una base ortonormal $\mathcal{B} = \{ x_1, \dots, x_{2p}\}$ tal que  diagonaliza a $b$ de la siguiente manera.
+\[
+[b]_{\mathcal{B}}
+=
+\begin{bmatrix}
+1 & 0  & \dots & 0 & 0 \\
+0 & 1  & \dots & 0 & 0 \\
+\vdots & \vdots  & \ddots & \vdots \\
+0 & 0  & \dots & -1 & 0 \\
+0 & 0  & \dots & 0 & -1
+\end{bmatrix}
+\]
+
+Como los autovectores se pueden elegir de manera que sean ortogonales entre sí, los espacios generados por ellos mismos también van a ser ortogonales entre sí y de esa manera descomponen al espacio hiperbólico en una suma ortogonal.
+
+\[ \mathcal{U} = \langle x_1 \rangle \oplus \dots \oplus \langle x_{2p} \rangle \]
+
+ Afirmo que sabiendo esto puedo juntar de a pares los espacios generados por los autovectores, ya que la cantidad de autovectores es $2p$. Los pares los elijo de manera que un autovector le corresponda el autovalor $+1$ y al otro autovector le corresponda el autovalor $-1$. Tomo como candidato $H_{i} = \langle x_i \rangle \oplus \langle x_{i+p} \rangle $. Veamos que éste es un plano hiperbólico. 
+ 
+ Para eso tendría que ver que la forma bilineal $b$ al restringirse es no degenerada y en la signatura tiene la misma cantidad de $+1$ que de $-1$. Pero esto es claro por como elegí a este subespacio. Si considero la matriz con respecto a la base dada por los generadores $x_i$ y $x_{i+p}$
+ 
+ \begin{equation*}
+ 	\left. [b]\right| _ {H_i}	=
+ 	\begin{bmatrix}
+ 	b(x_{i}, x_{i}) & \dfrac{b(x_{p+i}, x_{i})}{2}  \\
+ 	\dfrac{b(x_{p+i}, x_{i})}{2} & b(x_{p+i}, x_{p+i}) \\
+ 	\end{bmatrix}
+\end{equation*} 
+  Y por ser los autovectores de una base ortogonal, lo que obtengo es que la matriz que me queda es la siguiente.
+  \begin{equation*}
+  \left. [b]\right| _ {H_i}	=
+  \begin{bmatrix}
+  1 & 0  \\
+  0 & -1 \\
+  \end{bmatrix}
+  \end{equation*}
+Se puede ver en esta matriz que la forma bilineal es simétrica y no degenerada dado que 0 no aparece en la diagonal. De manera similar su signatura tiene la misma cantidad de $+1$ que de $-1$. Esto me dice que es un plano hiperbólico. Por lo tanto basta con tomar la siguiente suma de planos hiperbólicos.
+\begin{equation*}
+ \mathcal{U} = H_1 \oplus \dots \oplus H_{p} 
+\end{equation*} 
+
+
+\subsection*{(b)}
+
+Queremos caracterizar a los vectores isotrópicos de los planos hiperbólicos. Dado que es un espacio vectorial de dimensión 2 existe una base \textit{canónica} que llamaremos $E$.
+Para eso voy a volver a usar el teorema espectral para encontrarme la base que diagonaliza
+ \begin{equation*}
+D \coloneqq [b]_\mathcal{B}	=
+\begin{bmatrix}
+1 & 0  \\
+0 & -1 \\
+\end{bmatrix}
+\end{equation*} 
+
+Sea $S$ la matriz de autovectores que diagonaliza a la forma bilineal. Lo que tenemos es que otra manera de decir que un vector $v$ es isotrópico es la siguiente.
+\[ b(v,v) = 0 \iff v^{t}S^{t}DSv=0 \]
+Sea $w = (x, y)$ un vector genérico, veamos cuándo se anula en la forma bilineal. 
+\[ w^{t}Dw = 0 \iff x^{2} - y^{2} = 0 \]
+Y esto sucede cuando $x=y$ o bien $x=-y$. Es decir $w \in \langle (1,1) \rangle $ y $w \in \langle (-1,1) \rangle$ Esto nos define ambas rectas pero recordemos que estamos pensandolo en la base ortonormal. Por lo tanto para despejar el vector $v$ tengo que hacer lo siguiente.
+\[ Sv = w \implies v= S^{t}w\]
+Por lo tanto las rectas que me quedan definidas son las siguientes dos.
+
+\begin{equation*}
+L_1	\coloneqq
+\left\langle  S^t\begin{bmatrix}
+1   \\
+1  \\
+\end{bmatrix}
+\right\rangle 
+\end{equation*}
+\begin{equation*}
+L_2	\coloneqq
+\left\langle  S^t\begin{bmatrix}
+1   \\
+-1  \\
+\end{bmatrix}
+\right\rangle 
+\end{equation*} 
+
+\subsection*{(c)}
+Buscamos un subespacio de dimensión $p$ tal que esté formado por vectores isotrópicos. Para eso voy a construir explicitamente este subespacio usando del resultado anterior  que puedo descomponer al espacio como una suma directa de planos hiperbólicos. 
+\begin{equation*}
+\mathcal{U} = H_1 \oplus \dots \oplus H_{p} 
+\end{equation*}
+De cada plano hiperbólico puedo obtener una recta isotrópica que es un subespacio vectorial de dimensión 1. Si tomo la suma de todas estas rectas obtengo un subespacio de $\mathcal{U}$ de dimensión $p$. Tendría que chequear que realmente es un subespacio de vectores isotrópicos (dado que claramente es un subespacio). Para eso si defino como $\langle v_i \rangle \subset H_i$ la recta de vectores isotrópicos dentro del i-ésimo espacio hiperbólico. Lo que afirmaba antes es que el siguiente subespacio $S$ cumple lo pedido.
+\[S \coloneqq \left\langle v_1 \right\rangle \oplus \dots \oplus \left\langle v_p \right\rangle   \]
+Sea $v= \sum_{i=1}^{p} \lambda_{i}v_{i}$ un vector genérico del subespacio $S$ en la escritura de la suma directa. Veamos que $b(v,v)=0$.
+
+\begin{align*}
+	b(v,v) &= b\left( \sum_{1}^{p} \lambda_{i=i}v_{i}, \sum_{1}^{p} \lambda_{i=i}v_{i}\right) \\
+	& = \sum_{i=1}^{p} \lambda_{i}^{2} b(v_i,v_i) + \sum_{i<j, i=1}^{j=p} \lambda_{i}\lambda_{j} b(v_j,v_i) \\
+	& = 0
+\end{align*}
+Porque los vectores $v_i$ son isotrópicos y son ortogonales con los $v_j$  por estar en distintos planos hiperbólicos que ya son ortogonales entre sí. Por lo tanto el subespacio $S$ es un subespacio isotrópico de dimensión $p$.
+
+\bigskip
+
+
+\section*{Ejercicio 2}
+Busco la ecuación normal euclídea de la siguiente cuádrica de $\mathbb R ^3$. 
+\[ F(x) = x_1 ^2 +2x_1 x_3 +6x_1 +2x_2 +8x_3 -1  = 0\]
+La matriz asociada a la forma bilineal $\beta_f$ es la siguiente.
+ \[ \beta_f =
+ \begin{bmatrix}
+ 1 & 0 & 1  \\
+ 0 & 0 & 0 \\
+ 1 & 0 & 0
+ \end{bmatrix}
+ \]
+Tal que si calculo sus autovalores y autovectores obtengo lo siguiente. 
+\begin{itemize}
+	\item $\lambda_1=\frac{1}{2} (1+\sqrt{5})$, $v_1= (\frac{1}{2}(1+\sqrt{5}),0,1)$ 
+	\item $\lambda_2=\frac{1}{2} (1-\sqrt{5})$, $v_2= (\frac{1}{2}(1-\sqrt{5}),0,1)$
+	\item $\lambda_3=0$, $v_3= (0,1,0)$
+\end{itemize}
+En este caso los autovectores están sin normalizar por lo tanto los normalizo $v_1 = \dfrac{v_1}{\norm{v_1}}$ y $v_2 = \dfrac{v_2}{\norm{v_2}}$
+Llamaré $O$ a la matriz ortonormal que tiene como columnas a los autovectores de la forma bilineal y $D$ la matriz diagonal que tiene los autovalores $\lambda_i$. Entonces la forma cuadrática la puedo escribir de la siguiente manera.
+\begin{equation}
+\label{formula}
+ F(x) = x^{t}ODO^{t}x + b^{t}OO^{t}x -1 
+ \end{equation}
+Calculo $O^{t}x$ que me va a dar mis nuevas coordenadas. Denotaré al vector como $(\tilde{x_1},\tilde{x_2},\tilde{x_3})$  En este caso me queda,
+\[
+O^tx = 
+\begin{bmatrix}
+\dfrac{1}{\norm{v_1}}(\frac{1}{2}(1+\sqrt{5})x_1 + x_3) \\
+\dfrac{1}{\norm{v_2}}(\frac{1}{2}(1-\sqrt{5})x_1 + x_3) \\
+x_2 \\
+\end{bmatrix}
+\]
+
+
+
+
+En este caso  la parte lineal de la cuádrica nos queda lo siguiente.
+\[b^tO(\tilde{x_1},\tilde{x_2},\tilde{x_3})^t = \left( \dfrac{4+2\sqrt{5}}{\norm{v_1}},\dfrac{3}{\norm{v_2}},4\right)(\tilde{x_1},\tilde{x_2},\tilde{x_3})^t \]
+Expandiendo la fórmula \ref{formula} nos queda
+\[ F \sim \frac{1}{2} (1+\sqrt{5}) {\ti x_1}^2 + \frac{1}{2} (1-\sqrt{5}){\ti x_2}^2 +\dfrac{4+2\sqrt{5}}{\norm{v_1}}{\ti x_1} + \dfrac{3}{\norm{v_2}}{\ti x_2} +4{\ti x_3} -1  \]
+
+ Completando cuadrados me queda de la siguiente forma canónica. En este corresponde a una $C_{2,1}$ que es un \textit{paraboloide hiperbólico}.
+ \[ F \sim \frac{1}{2} (1+\sqrt{5})x_1 ^2 +  \frac{1}{2} (1-\sqrt{5}) x_2 ^2 - 4x_3 \]
+ 
+ Definimos la transformación ortogonal afín $f$ que manda la base que hace que la cuádrica esté en su forma canónica a la base estándar de $\mathbb R ^3$
+ de la siguiente manera.
+  \begin{align*}
+   f\left( \dfrac{1}{\norm{v_1}}(\frac{1}{2}(1+\sqrt{5})x_1 + x_3) - \dfrac{4+2\sqrt{5}}{\norm{v_1}} \right) &= x_1  \\
+   f\left( \dfrac{1}{\norm{v_2}}(\frac{1}{2}(1-\sqrt{5})x_1 + x_3) - \dfrac{3}{\norm{v_2}} \right) &= x_2  \\
+   f\left( x_2 -\left( \dfrac{3}{\norm{v_2}}\right)  ^2 - \left( \dfrac{4+2\sqrt{5}}{\norm{v_1}}\right) ^2 \right)  &= x_3  \\
+ \end{align*}
+Pero lo que nos piden es hallar la inversa de esta transformación lineal, esto es $f^{-1}$ \footnote{A la inversa no la escribí explicitamente porque quedaba una expresión muy complicada.  Esto me hace sospechar que quizá cometí un error de cuentas que no logré encontrar.}. Ésta nos va a mandar la base canónica de $\mathbb R ^3$ en la base tal que la cuádrica tiene la forma canónica. Esta transformación afín ortogonal $g  \coloneqq f^{-1}$ hace que nos quede 
+\[ G(x) \coloneqq F(g(x)) \sim \frac{1}{2} (1+\sqrt{5})x_1 ^2 +  \frac{1}{2} (1-\sqrt{5}) x_2 ^2 - 4x_3 \]
+
+
+\end{document}

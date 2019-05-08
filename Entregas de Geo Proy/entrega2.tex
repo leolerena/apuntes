@@ -1,0 +1,116 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amssymb}
+% Include links
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{mathtools}
+\usepackage{pifont}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Geometría Proyectiva}
+\author{Leopoldo Lerena}
+
+
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\']{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Proy}{\mathbb P ^n (k)}
+\newcommand{\A}{\mathbb A}
+
+
+\title{Segunda entrega.}
+\date{Septiembre 2018}
+
+\begin{document}
+\maketitle
+
+
+\textbf{Clasificación de cuádricas en el espacio proyectivo.}
+	
+	Un conjunto $Q \subset \mathbb P ^n (k)$ se llama cuádrica proyectiva si existe $F$ polinomio homogéneo de grado 2 en $n+1$ variables tal que
+	\[Q = \{ [v] \in \Proy  : F(v) = 0\} \]
+	
+\begin{enumerate}
+	\item[(a)] Si $k = \R$, probar que existe un isomorfismo proyectivo $T$ tal que $T(Q)=\mathcal C(G_{p,r})$ con $G_{p,r}$ de la siguiente forma
+	\[G_{p,r} = \sum_{i=0}^{p} {X_i}^2 - \sum_{i=p+1}^{r} {X_i}^2, \hspace{0.5cm} 0\leq p \leq r \leq n, \hspace{0.5cm} r \leq 2p+1. \]
+	Probar que el par $(p,r)$ no depende de la elección  de $T$.
+	
+	\bigskip
+	
+	\textit{Solución.}
+	Como la cuádrica está dada por un polinomio homogéneo de grado 2 en n+1 variables se corresponde a 
+	\[ F(x) = \sum_{i=0}^{n} a_{ii} {X_i}^2 + \sum_{i,j}^{} 2a_{ij}X_{i} X_{j} = 0.\]
+	Esto lo puedo pensar de la siguiente manera, si defino la matriz simétrica $A = (a_{ij})_{ij}$ que tiene como entradas los coeficientes de la cuádrica
+	\begin{align*}
+		0 &= F(x) \\
+		0 &= x^t A x. \\	
+	\end{align*}
+	Dado que es simétrica y sobre los reales, puedo encontrar una matriz ortogonal $B$ tal que la diagonaliza. En particular por ser ortogonal, es inversible y por lo tanto pertenece a $Gl_{n+1}(k)$, pero tendría que ver que no es una homotecia para que sea un isomorfismo proyectivo. Las únicas homotecias ortogonales son la identidad y $(-1)$ por la identidad. En ambos casos me diría que la matriz $A$ ya estaba diagonalizada. Por lo tanto una vez diagonalizada, si $D$ es la matriz diagonal con los elementos $d_{ii} \in \R$, pude reescribirlo como
+	\begin{align*}
+	0 &= F(x) \\
+	0 &= x^tB^tABx \\
+	0 &= x^tDx.
+	\end{align*}
+	Lo que acabo de hacer se puede hace idénticamente para cuádricas homogeneas (de tipo A) en el plano afín que ya sabemos que son de la forma $G_{p,r}$ por lo tanto 
+	esto me dice que la tengo escrita así
+	\[ G = \sum_{i=0}^{p} d_{ii}{X_i}^2 - \sum_{i=p+1}^{r} d_{ii}{X_i}^2, \hspace{0.5cm} 0\leq p \leq r \leq n, \hspace{0.5cm} r \leq 2p+1. \]
+	Faltaría que los $d_{ii}$ sean $+1$ o $-1$. Para eso necesito unas transformaciones proyectivas con matrices asociadas $S_i$ para $  0 \leq i \leq r$ tales que
+	\begin{align*}
+	\sum_{i=0}^{p} {X_i}^2 - \sum_{i=p+1}^{r} {X_i}^2 &= x^t{S_r}^{-1}\dots {S_0}^{-1}DS_0 \dots S_rx.
+	\end{align*}
+	Puedo tomar como $S_i$ la transformación proyectiva con matriz asociada diagonal definida como $s_{jj} = 1$ para $j \neq i$ y $s_{ii} = \sqrt d_{ii} $ \footnote {Esto nos dice que sobre el cuerpo de los complejos todas las cuádricas proyectivas son definidas positivas.}. Es una transformación proyectiva porque en particular no es una homotecia y es inversible. \qed
+	
+	
+	
+	 
+	\bigskip
+	
+	\item[(b)]  Sea $Q= \mathcal{C} (F)$ una cuádrica, donde
+	\[F = x^2 +y^2 -z^2.\]
+	Mostrar que la parábola, la hipérbola y la elipse son secciones de $Q$ por planos afines.
+	
+	\bigskip
+	
+	\textit{Solución.} Busco planos afines tales que al intersecarlos con $Q$ obtenga una parábola, una hipérbola y una elipse.
+	
+	Para obtener una elipse considero el plano afín que tiene los puntos con coordenada $z$ igual a $1$, lo defino como $\A_1 = \{(x,y,z) \in \Proy : z=1\} $. En tal caso la intersección $Q \cap \A_1$ consiste en 
+	\begin{equation*}
+	 F(x) = x^2 + y^2 -1^2 = x^2 + y^2 - 1. 
+	\end{equation*}
+	La cuádrica que define es una elipse.
+	
+	Para obtener una hipérbola considero el plano afín que tiene los puntos con coordenada $y$ igual a $1$, de manera similar defino $\A_2 = \{(x,y,z) \in \Proy : y=1\}$. Tal que la intersección $Q \cap \A_2$ consiste en
+	\begin{equation*}
+	F(x) = x^2 + 1^2 -z^2 = x^2 + 1^2 - z^2. 
+	\end{equation*}
+	La cuádrica que queda definida es una hipérbola.
+	
+	Para obtener una parábola voy a tener que considerar el plano afín dado por los puntos que tienen coordenada $z$ igual a $1+y$. Lo defino como $\A_3 = \{(x,y,z) \in \Proy : z=1+y\}$. La intersección $Q \cap \A_2$ consiste en
+	\begin{align*}
+	F(x) = x^2 + y^2 -(1+y)^2 &= x^2 + y^2 - y^2 + 2y - 1. \\
+	F(X) &= x^2 + 2y - 1 .\\
+	\end{align*}
+	La cuádrica que quedó definida es una parábola. \qed
+\end{enumerate}
+	
+	
+	
+
+
+
+\end{document}

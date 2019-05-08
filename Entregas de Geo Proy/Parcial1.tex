@@ -1,0 +1,235 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage[top=30pt,left=48pt,right=46pt]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+\newcommand{\R}{\mathbb R}
+\newcommand{\PProy}{\mathbb P ^2 (\mathbb R)}
+\newcommand{\RProy}{\mathbb P ^1 (\mathbb R)}
+\newcommand{\A}{\mathbb A}
+
+
+%opening
+\title{Geometría Proyectiva \\ \large Resolucion del primer parcial \\\line(1,0){350}}
+\author{Leopoldo Lerena }
+
+\begin{document}
+
+\maketitle
+\begin{itemize}
+	\item [1.] Sean $\mathcal{Q}_a$ y $\mathcal{Q}$ las cuádricas en el espacio 
+
+	\begin{align*}
+	\mathcal{Q}_a=\{\vec{x} \in \mathbb{R}^3/ a^2x^2+2xz+y^2+2z^2+4x-2y-4z-1=0 \} \\
+	\mathcal{Q}=\{\vec{x} \in \mathbb{R}^3/x^2+z^2-y-1=0 \}
+	\end{align*}
+	
+	Encontrar todos lo $a \in \mathbb{R}$ de modo que exista un isomorfismo afín $f$ que satisfaga $f(\mathcal{Q}_a)=\mathcal{Q}$.
+	
+	\textbf{Solución.}
+	
+	Busco valores de $a \in \R$ tales que $\mathcal{Q}_a$ y $\mathcal{Q}$ tengan la misma forma canónica afín. Primero observo que si para $\mathcal{Q}$ tomo la transformación afín $g$ que manda $y-1$ a $y$ 
+	\[g(\mathcal{Q}): x^2 +z^2 -y = 0\]
+	Entonces busco $a$ tal que quede de forma canónica $C_{2,0}.$
+	
+	Primero completo cuadrados en $\mathcal{Q}_a$ para ver qué condiciones surgen. En esta primer instancia supongo que $a \neq 0$ y este otro caso lo veré más en adelante.
+	\begin{align*}
+	\mathcal{Q}_a &= (y-1)^2+a^2x^2+2xz+4x-4z+2z^2 \\
+	&= (y-1)^2 +(ax + \dfrac{z+2}{a})^2 + 2z^2 -4z \\
+	\end{align*}
+	Entonces lo que quiero hacer es perder el término cuadrático en $z$ y no puedo hacerlo para $x$ porque supuse $a \neq 0$. Esto me va a decir que 
+	\begin{align*}
+	-\dfrac{z^2}{a^2} + 2z^2 &= 0 \\
+	|a| &= \dfrac{1}{\sqrt 2} \\
+	\end{align*}
+	Entonces si considero este valor de $a$ puedo ver que tomando la transformación afín $f$ tal que manda $(-4z+\dfrac{2z}{a^2}+\dfrac{4}{a^2})$ a $z$ luego $f(\mathcal{Q}_a)$ es $C_{2,0}$.
+	
+	Me falta analizar el caso que $a=0$. En tal caso puedo observar que al ser del tipo $C$ no debería tener centro pero en este caso el gradiente queda
+	\[ \nabla(Q_0) = (4+2z,2y-2,2z+2x-4) \]
+	Y existe una solución para la ecuación $\nabla(Q_0) = 0$ por lo tanto el centro de $Q_0$ es no vacío y no pueden ser afinmente equivalentes con una cuádrica de tipo $C$. \qed
+	
+	\line(1,0){500}
+	
+	\item[2.] \begin{itemize}
+		\item [a)] Sea $\mathcal{S}=\{(1,-1,0), (3,0,2), (2,1,1);(4+3i,-1,1+2i)\}$ un marco de referencia en $\mathbb{P}^2(\mathbb{C})$.
+		
+		Hallar las coordenadas del punto $[24+18i:4+6i:-4-6i]$ en el marco de referencia obtenido por aplicar el cambio de coordenadas generado por $f$ al marco $\mathcal{S}$, donde $f([\vec{x}])=[A\vec{x}]$ con 
+		
+		$A=\begin{pmatrix}
+		2&0&\phantom{-}0 \\ 0&1&\phantom{-}1 \\ 0&1&-1
+		\end{pmatrix}$
+		
+		
+		
+		
+		\item[b)]Probar que para todo conjunto finito de puntos de $\mathbb{P}^2(\mathbb{R})$ hay una recta proyectiva que no pasa por ninguno de ellos 
+	\end{itemize}
+
+\textbf{Solución.}
+\begin{itemize}
+	\item[a)] 
+	 Primero busco las coordenadas del cuarto punto del marco de referencia en la base dada por los primeros tres vectores, viendolos en el espacio vectorial antes de tomarles el cociente.  Como $f$ es lineal puedo buscar las coordenadas del cuarto punto en $S$ y después mirar el marco de referencia $f(S)$ o equivalentemente primero considerar $f(S)$ y después buscar las coordenadas del cuarto punto en la nueva base. Elijo la primera.  En este caso el cuarto punto resulta ser
+	\[(4+3i,-1,1+2i) = 2(1,-1,0) +i(3,0,2) +1(2,1,1) \]
+	Esto es que las coordenadas en el marco de referencia $S$ resultan ser $[2:i:1]$.
+	Renombro los vectores como $x_1=2(1,-1,0) ,x_2=i(3,0,2) ,x_3=(2,1,1), x= (4+3i,-1,1+2i)$ 
+	Ahora hago el cambio de coordenadas  multiplicando todos estos vectores por la matriz $A$ del cambio de base. En tal caso me queda lo siguiente. 
+	\begin{equation*}
+	\begin{cases} 
+		Ax =(8+6i,2i,-2-2i) \\
+		Ax_1 = (4,-2,-2) \\
+	Ax_2 = (6i,2i,-2i) \\
+		Ax_3 = (4,2,0) \\		
+	\end{cases}  
+	\end{equation*}
+	Ahora basta con encontrarme las coordenadas del punto $[24+18i:4+6i:-4-6i]$ en la base dada por $\{Ax_1,Ax_2,Ax_3\}$.
+	\[ [24+18i:4+6i:-4-6i] = 2Ax_1 + 3Ax_2 +4Ax_3 \]	
+	Por lo tanto las coordenadas del punto en el nuevo marco de referencia resultan ser $[2:3:4]$
+	
+	
+	\item[b)] Supongo por absurdo que no es cierto y quiero llegar a una contradicción. Para eso primero noto que el plano proyectivo no es finito, ya que tiene una copia de $\R$ dentro suyo y esto se debe a que 
+	\[ \PProy = \R \cup \RProy \]
+	Donde $\R$ es infinito por lo tanto $\PProy$ también.
+	
+	Por lo tanto existe algún punto $p$ que no está en esta colección finita de puntos $F=\{p_1, \dots, p_n\}$. Miro las rectas del plano proyectivo que pasen por este punto $p$ y necesariamente todas estas rectas van a contener a algún punto de $F$ caso contrario tendría una contradicción.  Porque esa recta no contendría a ninguno de los puntos de $F$ lo cual niega la suposición. Como cada punto de $\PProy$ está en la recta que lo une con el punto $p$ y estas rectas al contener algun punto  $p_i \in F$ necesariamente resultan ser la recta que une el punto $p_i$ con $p$. Dado que una recta en un plano proyectivo queda determinado por dos puntos y sus intersecciones son siempre de un único punto. Concluyo que el plano proyectivo es una unión de finitas rectas,
+	\begin{equation} \label{rectas}
+	 \PProy = \bigcup_{i=1 \dots m} L_i 
+	\end{equation} 
+	donde $L_i$ son rectas proyectivas que pasan por $p$.
+	
+	Si considero la preimagen de la proyección al cociente en \ref{rectas} me queda la siguiente igualdad
+	\begin{equation*}
+	\R ^3 = \bigcup_{i=1 \dots m} P_i.
+	\end{equation*}
+	Donde los $P_i$ son planos que pasan por el origen. Y esto es una contradicción porque un espacio vectorial sobre un cuerpo infinito, como resulta ser $\R$, no puede ser unión de finitos subespacios. Esto se puede demostrar en este caso particular usando el teorema de Baire dado que los subespacios tienen contenido $0$ y $\mathbb R^3$ es completo por lo tanto no puede ser unión de estos subespacios.
+	
+	{\small Otra manera de verlo es usando álgebra lineal, haciendo inducción en la cantidad de planos. Para el caso base claramente un espacio vectorial no puede ser igual a un subespacio propio debido a que las dimensiones resultan ser distintas. Para el paso inductivo  $\R ^3 = \bigcup_{i=1 \dots m} P_i$ luego puedo tomar $x \in P_n, y \in \R^3 \setminus P_m$ que existe dado que los planos son subespacios propios. Miro los vectores del tipo $x +\alpha y$ con $\alpha \in \R^{*}$, que son infinitos y como están en $\bigcup_{i=1 \dots m-1} P_i$ resulta ser que infinitos de ellos están en algún $P_j$, por lo tanto como es un subespacio resulta que $y \in P_j$ y por lo tanto $x \in P_j$. Como este procedimiento se puede hacer para todo $x \in P_m$ resulta que $P_m \subset \bigcup_{i=1 \dots m-1} P_i$ y por lo tanto llegamos a la contradicción pues $\R^3 = \bigcup_{i=1 \dots m-1} P_i$ que por hipótesis inductiva no sucede.}
+\end{itemize}
+
+    \line(1,0){500}
+
+   \item[3.] Probar que una colección de puntos y rectas con las siguientes propiedades.
+   \begin{itemize}
+   	\item Dos puntos distintos cualesquiera definen una única recta.
+   	\item Todas las rectas contienen exactamente $q+1$ puntos para un cierto $q \ge 2$.
+   	\item Hay un total de $q^2+q+1$ puntos en el espacio.
+   	
+   \end{itemize}
+              es un plano proyectivo. 
+             
+   \textbf{Solución.}
+   Para ver que es un plano proyectivo basta ver que se cumplen los siguientes tres axiomas
+  	\begin{itemize}
+  		\item[P1.] Dos puntos distintos cualesquiera definen una única recta.
+  		\item[P2.] Dos rectas distintas se cortan en un único punto.
+  		\item[P3.] Existen 4 puntos de los cuales no hay 3 alineados.
+	\end{itemize}
+	
+	Se cumple P1. dado que es un axioma de la lista dada.
+	
+	Para ver que se cumple P2. voy a verlo en dos partes y usar un lema auxiliar. Primero veo que si hay intersección no trivial entre dos rectas resulta ser un punto. Supongo que no es así, luego hay por lo menos dos puntos en la intersección. Uso el axioma P1. para deducir que la recta definida por estos puntos de la intersección es única por lo tanto ambas rectas resultan ser la misma.
+	
+	Para demostrar que existe la intersección entre dos rectas cualesquieras voy a utilizar el siguiente resultado.
+	\medskip
+	\begin{tcolorbox}[title=Lema auxiliar]
+		\textit{La cantidad de rectas es la misma que la cantidad de puntos.}
+	\end{tcolorbox}
+
+{\small 	\textit{Demostración.} Voy a contar directamente la cantidad de rectas. Para eso primero me fijo la cantidad de rectas que pasa por un punto $p$ fijo. Por cada punto del espacio distinto de $p$ puedo trazar una recta que pase $p$ y por lo tanto hay $q^2 + q$ rectas, pero estoy contando de más por lo tanto divido por la cantidad de puntos en cada recta distintos de $p$ y esto me da en total $\dfrac{q^2 +q}{q} = q+1$. Ahora que sé cuantas rectas pasan por un punto voy a calcular la cantidad de rectas en total. Como hay un total de $q^2 +q+1$ puntos tales que pasan $q+1$ rectas por cada uno tengo un total de $(q^2 +q+1)(q+1)$ puntos pero tengo que dividir por $q+1$ que son los puntos en cada recta que estoy contando de más. Por lo tanto el total de rectas es $q^2 +q+1$.}
+	
+	\medskip
+	
+	Ahora voy a usar este lema para llegar a una contradicción si supongo que existen rectas tales que no se intersecan. Sean $\mathcal{L}, \mathcal{L}'$ rectas que no se intersecan. Fijado un punto de $\mathcal L$ considero las rectas que se definen con cada punto de $\mathcal{L}'$. Resultan ser $q+1$ rectas distintas. Hago lo mismo con cada punto de $\mathcal{L}$. Afirmo que resultan ser todas rectas distintas porque si hubiesen dos iguales tendrían que tener los mismos puntos en la intersección con $\mathcal{L}$ y con $\mathcal{L}'$ pero cada recta tiene un par de intersecciones distintos por cómo las tomé. Por lo tanto acabo de ver que la cantidad de rectas resulta ser $(q+1)^2$ y esto es mayor estricto a $q^2 +q+1$ para $q\geq 2$. Absurdo, por lo tanto queda demostrado que vale P2.
+	\medskip
+	
+	Para demostrar P3 voy a exhibir esos 4 puntos. Sé que existen $q^2 +q+1$ rectas y esto es siempre mayor o igual a 7. Por lo tanto sean 2 rectas distintas $\mathcal{L}, \mathcal{L}'$ tal que por el axioma P2. se intersecan en un único punto $p$. Sean $p_1, p_2 \in \mathcal{L}$ y sea $p_3, p_4 \in \mathcal{L}'$, todos distintos de $p$ y esto se puede hacer porque las rectas tiene como mínimo 3 puntos. Afirmo que estos 4 puntos cumplen lo pedido. Para eso sea un subconjunto de 3 puntos (todos los casos son analogos porque hay 2 de una recta y 1 de la otra recta) supongo que es $p_1,p_2,p_3$. Resulta que no están alineados caso contrario $p_3 \in \mathcal L$ pero como $p_3 \in \mathcal{L}'$ esto condice a que $p_3 = p$, lo cual es un absurdo.
+   
+   \line(1,0){500}
+   
+   \item[4.] Sea $\alpha : \mathbb{R} \rightarrow \mathbb{R}^2$ una curva regular con curvatura $\kappa$ nunca nula y $c$ un número real positivo. Supongamos que todas las rectas normales a $\alpha$ están siempre a distancia $c$ del origen. Probar que $$||\alpha(t)||=\sqrt{c^2+\frac{1}{\kappa(t)^2}}$$
+   
+   \textbf{Solución.}
+   Primero voy a suponer que está parametrizada por longitud de arco. Esto porque su curvatura y la condición de que las rectas normales están siempre a distancia $c$ del origen no dependen de la parametrización.
+   
+   Como $\alpha$ es una curva regular parametrizada por longitud de arco tengo triedro de Frenet, dado por $\{T(t),N(t)\}$. Por lo tanto para calcular la norma, como al vector $\alpha(t) $ lo puedo escribir en esta base ortonormal
+   \[\alpha(t) = \langle \alpha(t),T(t) \rangle T(t) + \langle \alpha(t),N(t) \rangle N(t) \]
+   Su norma resulta ser
+   $$||\alpha(t)||=\sqrt{\langle \alpha(s),T(s) \rangle ^2 + \langle \alpha(s),N(s) \rangle ^2}$$.
+   Por lo tanto me alcanza con calcular estos dos coeficientes. Para eso utilizo que las rectas normales a $\alpha$ están siempre a distancia $c$ del origen. Esto es que
+   \[ \langle \alpha(s),T(s) \rangle  = c. \]
+   Esto es uno de los coeficientes que buscaba, el otro lo voy a conseguir derivando esta igualdad. Usando la ecuación de Frenet-Serret y que $N(t)$ es ortogonal a $T(t)$ puedo obtener que esto es 
+   \begin{align*}
+   \langle \alpha(t),\kappa N(t) \rangle + \langle T(t),T(t) \rangle &= 0 \\
+   \dfrac{1}{\kappa} \langle \alpha(t), N(t) \rangle &= -1 \\
+    \langle \alpha(t), N(t) \rangle &= -\dfrac{1}{\kappa} \\
+   \end{align*} 
+   
+   Como ya tengo los dos coeficientes de la base ortonormal que quería resulta que 
+   \begin{align*}
+   	\alpha(t) &= ||\alpha(t)||=\sqrt{\langle \alpha(s),T(s) \rangle ^2 + \langle \alpha(s),N(s) \rangle ^2} \\
+   	&= \sqrt{c^2+\frac{1}{\kappa(t)^2}}
+   \end{align*}
+   
+   \line(1,0){500}
+   
+   \item[5.] Sea $\alpha$ una curva en $\mathbb{R}^3$ parametrizada por longitud de arco y con curvatura y torsión nunca nulas.
+   
+   Demostrar que si $\alpha$ es una hélice y cumple: $$\bigg(\frac{\kappa'}{\kappa^2}\bigg)^2 + \bigg(\frac{\tau}{\kappa}\bigg)^2=1$$
+   Entonces la curva $\beta$ de los centros de los circulos osculantes de $\alpha$ también es una hélice.
+   
+   \textbf{Solución.}
+   Quiero ver que la evoluta de una hélice resulta ser una hélice también. Para demostrar que es una hélice voy a ver que su vector tangente forma un anǵulo constante con respecto a un vector fijado.
+   
+   Primero calculo el vector tangente a la evoluta dada por $\beta(s) = \alpha(s) + \dfrac{1}{\kappa(s)}$. Como $\alpha$ está parametrizada por longitud de arco puedo usar Frenet-Serret con el triedro $\{T,N,B\}$ y dado que la curvatura $\kappa$ es no nula si derivo con respecto a $s$ me queda lo siguiente
+   \begin{align*}
+   \beta' &= \alpha' + \dfrac{\kappa'}{\kappa^2}N + \dfrac{1}{\kappa}N' \\
+   &= T + \dfrac{\kappa'}{\kappa^2}N - T - \dfrac{\tau}{\kappa}B \\
+   &=  \dfrac{\kappa'}{\kappa^2}N - \dfrac{\tau}{\kappa}B
+   \end{align*}
+   
+   Como $N$ y $B$ son ortogonales, calculando la norma al vector $\beta'$ resulta que esto es exactamente
+   \begin{align*}
+   ||\beta'||&=\sqrt{\bigg(\frac{\kappa'}{\kappa^2}\bigg)^2 + \bigg(\frac{\tau}{\kappa}\bigg)^2}\\
+   &=1
+   \end{align*}
+   Con esto concluí que el vector tangente a la evoluta $\beta$ resulta ser el mismo $\beta'$ dado que su norma es 1. Ahora para demostrar que es una hélice voy a tomar el vector $v$ (que puedo tomar de norma 1 porque no afecta al cálculo del ángulo) tal que forma un ángulo fijo con $\alpha$ y ver que también me sirve para $\beta$. Para eso si el ángulo es $\phi$, por fórmula sé que esto es
+   \[\cos(\phi) = \dfrac{\langle \beta', v \rangle}{||\beta'|| ||v||}\] 
+   Expandiendo el producto interno resulta ser que 
+   \begin{equation} \label{angl}
+   \begin{aligned}
+   \cos(\phi) &= \langle \beta', v \rangle \\
+   &= \langle \dfrac{\kappa'}{\kappa^2}N - \dfrac{\tau}{\kappa}B , v \rangle \\
+   &= \langle \dfrac{\kappa'}{\kappa^2}N \rangle - \langle  \dfrac{\tau}{\kappa}B , v \rangle
+   \end{aligned}
+   \end{equation}
+   
+   Entonces me alcanza con calcular estos dos productos internos. Sabiendo que $\alpha$ es una hélice puedo ver que si $c$ es una constante (es el coseno del ángulo que forman) luego puedo derivar dos veces y usar Frenet-Serret para obtener 
+   \begin{align*}
+   \langle T, v \rangle &= c \\
+   \langle T', v \rangle &= 0 \\
+   \kappa \langle N , v \rangle &= 0 \\
+   \langle -\tau B, v \rangle - \langle \kappa T, v \rangle &= 0 \\
+   \langle -\tau B, v \rangle -  \kappa c &= 0 \\
+   \langle  B, v \rangle =  -\dfrac{\kappa}{\tau} c \\
+   \end{align*}
+   Dado que $\alpha$ es una hélice resulta que esto es equivalente a que $\dfrac{\kappa}{\tau}$ es constante. Por lo tanto acabo de ver $\langle \dfrac{\kappa'}{\kappa^2}N \rangle  = 0$ y que $\langle  \dfrac{\tau}{\kappa}B , v \rangle$ es constante. Esto me dice volviendo a \ref{angl} que el ángulo $\phi$ resulta ser constante, y por lo tanto que la curva $\beta$ es una hélice.
+   
+   \line(1,0){500}
+   
+   
+   
+\end{itemize}
+
+ 
+
+
+
+
+\end{document}

@@ -1,0 +1,133 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath,amsfonts,amsthm,xcolor,amssymb,mathtools}
+\pagenumbering{gobble}
+\usepackage[top=30pt,left=48pt,right=46pt]{geometry}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{physics}
+
+\newenvironment{exercise}[2][Ejercicio]{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Resoluci\']{\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+
+\newcommand{\ti}{\tilde}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Proy}{\mathbb P ^n (k)}
+\newcommand{\A}{\mathbb A}
+
+
+\title{Geometría Proyectiva \\ \large Quinta entrega.  \\\line(1,0){350}}
+\date{26 de Noviembre}
+\author{Leopoldo Lerena}
+
+\begin{document}
+	\maketitle
+	\begin{exercise}{1}
+		\hspace{0pt}
+		\begin{itemize}
+			\item[(a)] Probar que dada $\alpha$ una curva $C^1$,
+			\begin{align*}
+			\|\alpha'(t)\| = \lim_{\ \ h \to 0^+} \frac{d(\alpha(t+h),\alpha(t))}{h}
+			\end{align*}
+			
+			\textbf{Solución.}
+			
+			Sea $S$ una superfiecie y $\alpha_:[a,b] \to S$ una curva de clase $C^1$. La idea es acotar el cociente $\frac{d(\alpha(t+h),\alpha(t))}{h}$ por ambos lados por expresiones que tengan como límite a $\alpha' (t)$ cuando $h \to 0^+$.
+			
+			Usando que la distancia euclidea siempre es menor que la distancia riemanniana de la superficie. Y que la distancia entre dos puntos de la superficie es el ínfimo de las longitudes de curvas que los unen, obtengo las siguientes cotas. 
+			\begin{align}
+			\label{sanguche}
+			\frac{\|\alpha(t+h) - \alpha(h)\|}{h} \leq \frac{d(\alpha(t+h),\alpha(t))}{h} \leq \frac{L_t^{t+h}(\alpha)}{h}.
+			\end{align}
+			
+			Primero observo que $ lim_{\ \ h \to 0^+} \frac{\|\alpha(t+h) - \alpha(h)\|}{h} = \alpha' (t) $, dado que justamente es una curva de clase $C^1$ por lo tanto su derivada está definida en todo punto por ese límite de cociente incremental.
+			
+			De manera análoga observo que $L_t^{t+h}(\alpha) = F(t+h) - F(t)$ con $F(s) = \int_t^s\|\alpha'(x)\|dx$ por hipótesis $\alpha'$ es una función continua, entonces
+			\begin{align*}
+			\lim_{\ \ h \to 0^+}\frac{1}{h}(F(t+h)-F(t)) = \lim_{h \to 0}\frac{1}{h}(F(t+h)-F(t)) = F'(t) \stackrel{(TFC)}{=} \|\alpha'(t)\|.  
+			\end{align*}
+			
+			Volviendo a \ref{sanguche} por sánguche obtenemos lo que queríamos demostrar.
+			
+			\qed
+			
+			\line(1,0){500}
+			
+			\bigskip
+			
+			
+			
+			\item[{(b)}] Probar que si $f$ preserva la distancia intr\'inseca, mapea geod\'esicas en geod\'esicas.
+			
+			\textbf{Solución.}
+			
+			Sea $S$ una superficie, sea $p \in S$ un punto, y tomemos un entorno exponencial $D_r(p)$ tal que en ese entorno existe una única geodésica que conecta $p$ con cualquier $q \in D_r(p)$. Sea esta geodésica $\gamma$, afirmo que $f\gamma$ es una geodésica usando que preserva distancias. Supongo que la geodésica está parametrizadad por longitud de arco luego dado que las geodésicas son localmente cortas sé que tengo la igualdad de distancias
+			\[d(p,q) = d(\gamma(s),p) + d(\gamma(s),q)\]
+			
+			Usando que $f$ preserva la distancia tenemos la igualdad para todo $s$
+			\[d(f(p),f(q)) = d(f(\gamma(s)),f(p)) + d(f(\gamma(s)),f(q))\]
+			Afirmo que $f(\gamma)$ es geodésica. Tomo un entorno exponencial tal que las geodésicas entre $f(p)$ y $f(\gamma(s))$ estén definidas y sean únicas minimizantes. Sea $\alpha$ la geodésica minimizante que alcanza $d(f(\gamma(s)),f(p))$ y sea $\beta$ la geodésica minimizante que alcanza $d(f(\gamma(s)),f(q))$, luego su concatenación tiene que ser la geodésica que une $f(p)$ y $f(q)$ dado que las distancias son iguales, por lo tanto tienen que ser restricciones de esta geodésica. Caso contrario restrinjo la geodésica entre el punto que pasa por $f(\gamma(s)$ y obtengo que tiene que ser $\alpha$ una restricción y $\beta$ la otra. Esto me dice que todo punto de $f\gamma$ está sobre la geodésica que une a $f(p)$ con $f(q)$. Por lo tanto $f\gamma$ es geodésica.
+			
+			 
+			\qed
+			
+			\line(1,0){500}
+			
+			\bigskip
+			
+			
+			\item[(c)] Probar que si $f$ es una funci\'on $C^1$ que preserva la distancia intr\'inseca, entonces es una isometr\'ia local.
+			
+			\textbf{Solución.}
+			
+			Para ver que $f$ es una isometría local me alcanza con ver que $D_p (f)$ es ortogonal para todo $p\in S$. Sea $v \in T_pS$, de manera que existe una curva $\alpha \subset S$ con $\alpha(0) = p$ y $\alpha'(0) = v$, tal que $D_p(f)v = (f \circ \alpha)'(0)$.  Para eso dado que $f$ es $C^1$, preserva distancias y usando el resultado anterior obtengo que
+			\begin{align*}
+			\|(f\alpha)'(0)\| = \lim_{\ \ h \to 0^+} \frac{d((f\alpha)(h),(f\alpha)(0))}{h} = \lim_{\ \ h \to 0^+} \frac{d(\alpha(h),\alpha(0))}{h} = \|\alpha'(0)\|.
+			\end{align*}
+			
+			Por lo tanto acabo de ver que $\| D_p(f)v \| = \|v\|$ y esto es que justamente sea ortogonal por lo tanto $f$ resulta ser una isometría local.
+			
+			\qed
+			
+			\line(1,0){500}
+			
+			\bigskip
+			
+			
+		\end{itemize}
+	\end{exercise}
+	
+	\begin{exercise}{2} 
+		Probar que si $S$ es una superficie compacta y orientable con curvatura siempre estrictamente positiva, entonces el mapa de Gauss es un difeomorfismo local sobreyectivo entre $S$ y la esfera.
+	\end{exercise}
+
+	\textbf{Solución.}
+	
+	Sea $k : S \to \R_{>0}$ la curvatura de Gauss de $S$. Para cada punto $p \in S$ tenemos que
+	\begin{align*}
+	& 0 < K(p) =  \det(DN_p)
+	\end{align*}
+	con $N : S \to \mathbb{S}^2$ el mapa de Gauss de $S$. \'Este \'ultimo tiene entonces diferencial inyectivo en todo punto y por tanto, $N$ es un difeomorfismo local.
+	
+	Para ver que es sobreyectivo quiero ver que todo vector $n \in S^2$ está en la imagen del mapa de Gauss. Para eso voy a considerar la familia de planos tales que tienen normal $n$ y ver que hay uno de ellos que es tangente a la superficie. Sea esta familia de planos $P_t \coloneqq \{x\in \R^3 : \langle n,x \rangle =t\}$. Como la superficie es compacta, en particular es acotada por lo tanto existe $t'$ suficientemente grande tal que $S \cap P_{t'} = \emptyset$. A su vez existe $t''$ tal que $S \cap P_{t''} \neq \emptyset$. Por lo tanto podemos pensar en encontrar el ínfimo de los $t$ mayores que $t''$ tales que la intersección con $S$ es no vacía.
+	\[ t_0 = \inf \{t>t'' : P_t \cap S \neq \emptyset \} \]
+	
+	Sea $q \in P_t \cap S $ \footnote{Acá por cómo elegí los índices, es decir que $t > t''$ el vector normal me va a quedar el $n$, en caso que tome $t < t''$ tendría que el vector normal es $-n$} dado que el plano es cerrado y la superficie es compacta, este ínfimo resulta ser un mínimo, por lo tanto nos queda que este plano dado por $P_{t_0}$ es tangente en $q$ a la superficie $S$. Para eso sea $v \in T_q S$ quiero ver que es ortogonal a $n$. Sea $\sigma$ una curva que pasa por $q$ con velocidad $v$. Tomamos la función que hace el producto interno con los vectores de esta curva con el $n$. Sea $f:(-\epsilon,\epsilon) \to S$ tal que $f(t)= \sigma(t) \cdot \vec{n}$. Dado que tiene un máximo en $0$ porque la curva está contenida en la superficie y $q$ fue elegido de esa manera. Esto es que $f'(0) = 0$. Ahora calculandole la derivada a esta función obtengo lo que quería pues $f'(0) = \sigma'(0)\cdot\vec{n} = \vec{v}\cdot\vec{n} = 0$. Por lo tanto llegué a que $n$ es normal a todo vector del plano tangente $T_q S$, y esto me quiere decir que ambos planos son el mismo. Es decir que $P_{t_0} = T_q S$ y por lo tanto encontré un vector de la superficie tal que por el mapa de Gauss su imagen sea $n$.
+
+
+	\qed
+
+	\line(1,0){500}
+
+	\bigskip
+
+	
+	
+\end{document}

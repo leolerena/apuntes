@@ -1,0 +1,187 @@
+
+
+
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+
+\title{Primer entrega.}
+\author{Leopoldo Lerena }
+\date{Septiembre 2018}
+
+\begin{document}
+
+\maketitle
+
+\section*{Ejercicio 1}
+\subsection*{(a)}
+\textit{Sean $U$ un espacio vectorial sobre $\mathbb R$, $b$ una forma bilineal sim\'etrica en $U$ y $Q$ la forma
+cuadr\'atica asociada a $b$. Decimos que $U$ es un espacio hiperb\'olico si $b$ es no degenerada
+y si signatura tiene igual cantidad de $1$ que de $-1$. En particular, esto implica que
+dim($U$) $= 2p$ y que la signatura de $b$ es $(2p, p)$. Si la dimensi\'on de $U$ es $2$, decimos que U es un plano hiperbólico.}
+
+
+\bigskip
+
+Quiero descomponer un espacio hiperbólico en una suma de planos hiperbólicos ortogonales entre sí. Acá voy a usar que $b$ es una forma bilineal simétrica  no degenerada. Por lo tanto  existe una base ortonormal $\mathcal{B} = \{ x_1, \dots, x_{2p}\}$ de $\mathcal U$ tal que  la matriz asociada a $b$  es de la siguiente manera.
+\[
+[b]_{\mathcal{B}}
+=
+\begin{bmatrix}
+1 & 0  & \dots & 0 & 0 \\
+0 & 1  & \dots & 0 & 0 \\
+\vdots & \vdots  & \ddots & \vdots \\
+0 & 0  & \dots & -1 & 0 \\
+0 & 0  & \dots & 0 & -1
+\end{bmatrix}
+.\]
+
+Como los autovectores son ortogonales entre sí, los espacios generados por ellos mismos también van a ser ortogonales entre sí y de esa manera descomponen al espacio hiperbólico en una suma ortogonal.
+
+\[ \mathcal{U} = \langle x_1 \rangle \oplus \dots \oplus \langle x_{2p} \rangle .\]
+
+ Afirmo que sabiendo esto puedo juntar de a pares los espacios generados por los autovectores, ya que la cantidad de autovectores es $2p$. Los pares los elijo de manera que un autovector le corresponda el autovalor $+1$ y al otro autovector le corresponda el autovalor $-1$. Tomo como candidato $H_{i} = \langle x_i \rangle \oplus \langle x_{i+p} \rangle $. Veamos que éste es un plano hiperbólico. 
+ 
+ Para eso tendría que ver que la forma bilineal $b$ al restringirse es no degenerada y en la signatura tiene la misma cantidad de $+1$ que de $-1$. 
+ 
+ \begin{equation*}
+ 	\left. [b]\right| _ {H_i}	=
+ 	\begin{bmatrix}
+ 	b(x_{i}, x_{i}) & \dfrac{b(x_{p+i}, x_{i})}{2}  \\
+ 	\dfrac{b(x_{p+i}, x_{i})}{2} & b(x_{p+i}, x_{p+i}) \\
+ 	\end{bmatrix}.
+\end{equation*} 
+  Y dado que por cómo los elegí antes de manera que $b(v,w)=0$ para todo $v \in H_i$,$w \in H_j$ con $j \neq i$, la matriz asociada resulta ser
+  \begin{equation*}
+  \left. [b]\right| _ {H_i}	=
+  \begin{bmatrix}
+  1 & 0  \\
+  0 & -1 \\
+  \end{bmatrix}.
+  \end{equation*}
+Tenemos finalmente una descomposición de $\mathcal U$ en suma directa de planos hiperbólicos de la siguiente manera
+\begin{equation*}
+ \mathcal{U} = H_1 \oplus \dots \oplus H_{p}. 
+\end{equation*} 
+
+
+\subsection*{(b)}
+
+\textit{Un vector $v$ en $U$ se dice isotr\'opico si es ortogonal a si mismo, es decir, si $b(v, v) = 0$.
+Probar que en un plano hiperb\'olico los vectores isotr\'opicos son la uni\'on de dos
+rectas que pasan por el origen.}
+
+\bigskip
+
+Queremos caracterizar a los vectores isotrópicos de los planos hiperbólicos. Sea $H$ un plano hiperbólico. Considero la base $\mathcal B = \{v_1 , v_2\}$ que hace que la matriz asociada a la forma bilineal $b$ sea de la siguiente forma
+ \begin{equation*}
+[b]_\mathcal{B}	=
+\begin{bmatrix}
+1 & 0  \\
+0 & -1 \\
+\end{bmatrix}.
+\end{equation*} 
+
+Un vector  $v \in H$ genérico se escribe como $v=rv_1 + sv_2$. Por definición de isotrópico cumple que 
+\[ b(v,v) = 0 \hspace{0.25cm} \text{sí y solo si} \hspace{0.25cm} v^{t}_{\mathcal{B}}[b]_{\mathcal{B}}v_{\mathcal{B}}=0. \]
+Expandiendo esto es lo mismo que ver que
+\[ r^2 - s^2 = 0. \]
+Esto dice que los módulos deben ser iguales, es decir que $|r|=|s|$. Nos definidas dos rectas $L_1, L_2$ que son
+\begin{align*}
+L_1 &= \{u \in \mathcal U : u =\lambda(v_1 + v_2) , \lambda \in \mathbb{R}\} \\
+L_2 &= \{u \in \mathcal U : u =\lambda(v_1 - v_2) , \lambda \in \mathbb{R}\}. \\
+\end{align*}
+
+
+
+
+\subsection*{(c)}
+\textit{Un subespacio $S$ se dice isotr\'opico si est\'a formado por vectores isotr\'opicos. Probar
+	que en todo espacio hiperb\'olico de dimensi\'on $2p$ existen subespacios isotr\'opicos de
+	dimensi\'on $p$.}
+
+\bigskip 
+
+Buscamos un subespacio de dimensión $p$ tal que esté formado por vectores isotrópicos. Para eso voy a construir explicitamente este subespacio usando del resultado anterior  que puedo descomponer al espacio como una suma directa de planos hiperbólicos. 
+\begin{equation*}
+\mathcal{U} = H_1 \oplus \dots \oplus H_{p} 
+\end{equation*}
+De cada plano hiperbólico puedo obtener una recta isotrópica que es un subespacio vectorial de dimensión 1. Si tomo la suma de todas estas rectas obtengo un subespacio de $\mathcal{U}$ de dimensión $p$. Tendría que chequear que realmente es un subespacio de vectores isotrópicos (dado que claramente es un subespacio). Para eso si defino como $\langle v_i \rangle \subset H_i$ la recta de vectores isotrópicos dentro del i-ésimo espacio hiperbólico. Lo que afirmaba antes es que el siguiente subespacio $S$ cumple lo pedido.
+\[S \coloneqq \left\langle v_1 \right\rangle \oplus \dots \oplus \left\langle v_p \right\rangle   \]
+Sea $v= \sum_{i=1}^{p} \lambda_{i}v_{i}$ un vector genérico del subespacio $S$ en la escritura de la suma directa. Veamos que $b(v,v)=0$.
+
+\begin{align*}
+	b(v,v) &= b\left( \sum_{i=1}^{p} \lambda_{i}v_{i}, \sum_{i=1}^{p} \lambda_{i}v_{i}\right) \\
+	& = \sum_{i=1}^{p} \lambda_{i}^{2} b(v_i,v_i) + \sum_{i<j, i=1}^{j=p} \lambda_{i}\lambda_{j} b(v_j,v_i) \\
+	& = 0
+\end{align*}
+Porque los vectores $v_i$ son isotrópicos y son ortogonales con los $v_j$  por estar en distintos planos hiperbólicos que ya son ortogonales entre sí. Por lo tanto el subespacio $S$ es un subespacio isotrópico de dimensión $p$.
+
+\bigskip
+
+
+\section*{Ejercicio 2}
+\textit{Determinar la ecuación normal euclídea de la siguiente cu\'adrica en $\mathbb R^3$, especificando la transformaci\'on ortogonal af\'in que act\'ua sobre ella para obtenerla.}
+\begin{align}
+x_1^2 + 2x_1x_2 + 2x_1x_3 + 6x_1 + 2x_2 + 8x_3 - 1 = 0.
+\end{align}
+
+\bigskip
+
+Busco la ecuación normal euclídea de la siguiente cuádrica de $\mathbb R ^3$. 
+\[ F(x) = x_1 ^2 +2x_1 x_2 +2x_1 x_3 +6x_1 +2x_2 +8x_3 -1  = 0\]
+La matriz asociada a la forma bilineal $\beta_f$ es la siguiente.
+ \[ \beta_f =
+ \begin{bmatrix}
+ 1 & 1 & 1  \\
+ 1 & 0 & 0 \\
+ 1 & 0 & 0
+ \end{bmatrix}.
+ \]
+Tal que si calculo sus autovalores factorizando el polinomio característico de la matriz $XI - \beta_f$ y los autovectores calculando el núcleo de $\lambda I - \beta_f$, donde $\lambda$ es un autovalor,  obtengo los siguientes resultados 
+\begin{itemize}
+	\item $\lambda_1=2$, $v_1= \dfrac{1}{\sqrt{6}}(2,1,1)$ 
+	\item $\lambda_2=-1 $, $v_2= \dfrac{1}{\sqrt{3}}(-1,1,1)$
+	\item $\lambda_3=0$, $v_3= \dfrac{1}{\sqrt{2}}(0,1,-1)$.
+\end{itemize}
+
+Llamaré $O$ a la matriz ortonormal que tiene como columnas a los autovectores de la forma bilineal y $D$ la matriz diagonal que tiene los autovalores $\lambda_i$. Entonces la forma cuadrática la puedo escribir de la siguiente manera.
+\begin{equation}
+\label{formula}
+ F(x) = x^{t}ODO^{t}x + b^{t}OO^{t}x -1 
+ \end{equation}
+Calculo $\ti x = O^{t}x$ que me va a dar mis nuevas coordenadas. En este caso me queda,
+\[
+O^tx = 
+\begin{bmatrix}
+&\dfrac{1}{\sqrt{6}}\left( 2x_1 + x_2 + x_3\right)  \\
+&\dfrac{1}{\sqrt{3}}\left( -x_1 + x_2 + x_3 \right)  \\
+&\dfrac{1}{\sqrt{2}} \left( x_2 - x_3\right)  \\
+\end{bmatrix}
+\]
+
+
+
+
+En este caso  la parte lineal de la cuádrica nos queda lo siguiente.
+\[b^tO(\tilde{x_1},\tilde{x_2},\tilde{x_3})^t = \left( \dfrac{22}{\sqrt{6}},\dfrac{4}{\sqrt{3}},\dfrac{6}{\sqrt{2}}\right)(\tilde{x_1},\tilde{x_2},\tilde{x_3})^t \]
+Desarrollando y completando cuadrados nos queda la expresión
+\begin{align*}
+F(x) = x^{t}ODO^{t}x + b^{t}OO^{t}x -1 &= 2x_1^2 - x_2^2 + \frac{22}{\sqrt{6}}x_1 - \frac{4}{\sqrt{3}}x_2 - \frac{6}{\sqrt{2}}x_3 - 1 = \\
+ &= (\sqrt{2}x_1 + \frac{11}{2\sqrt{3}})^2 -(x_2 + \frac{2}{\sqrt{3}})^2 -3\sqrt{2}(x_3 + \frac{13}{4\sqrt{2}})
+\end{align*}
+  En este caso se corresponde a una $C_{(2,-1,0), 3\sqrt2}$ .
+ \[ F \sim 2x_1 ^2 -  x_2 ^2 - 3\sqrt2 x_3 \]
+ 
+ Definimos la transformación ortogonal afín $f$ que manda la base que hace que la cuádrica esté en su forma canónica a la base estándar de $\mathbb R ^3$
+ de la siguiente manera.
+  \begin{align*}
+   f\left( \tilde{x_1} \right) &= \dfrac{1}{\sqrt{6}}\left( 2x_1 + x_2 + x_3\right) - \dfrac{11}{\sqrt{6}}  \\
+   f\left( \tilde{x_2} \right) &= \dfrac{1}{\sqrt{3}}\left( -x_1 + x_2 + x_3\right) - \dfrac{2}{\sqrt{3}}  \\
+   f\left( \tilde{x_3} \right)  &= \dfrac{1}{\sqrt{2}} \left( x_2 - x_3 - \frac{13}{4\sqrt{2}} \right)  \\
+ \end{align*}
+
+ Ésta nos va a mandar la base canónica de $\mathbb R ^3$ en la base tal que la cuádrica tiene la forma canónica. Esta transformación afín ortogonal $f$ es la que hace que nos quede 
+\[ G(x) \coloneqq F(f(x)) \sim 2x_1 ^2 -  x_2 ^2 + x_3 \]
+
+
+\end{document}
