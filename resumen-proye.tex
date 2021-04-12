@@ -1,0 +1,103 @@
+\documentclass[11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{geometry}\geometry{margin=1in}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools,sectsty}
+\pagenumbering{gobble}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[pdftex,dvipsnames]{xcolor}
+\usepackage{xargs}
+\usepackage{verbatim}
+
+\usepackage{hyperref}
+% Para modificar el estilo de las referencias
+\hypersetup{
+	colorlinks,
+	linkcolor={astral},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+\definecolor{astral}{RGB}{46,116,181}
+\colorlet{chulo}{blue!70!purple}
+\colorlet{rojo}{red!65!black}
+
+
+
+
+\subsectionfont{\color{astral!60!black} }
+\sectionfont{\color{astral!50!black} }
+\usepackage{mathpazo}
+\usepackage{amssymb}
+\usepackage{eufrak}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{thmtools}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+
+%%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
+% Let's define some theorem environments
+% To use later in the paper
+\theoremstyle{plain} % other options: definition, remark
+\newtheorem{teo}{\color{rojo} Teorema}
+\newtheorem{prop}[teo]{\color{rojo} Proposición}
+\newtheorem{lema}[teo]{\color{rojo} Lema}
+\newtheorem{coro}[teo]{\color{rojo} Corolario}
+% By including [theorem], the lemma follows the numbering of theorem
+% e.g. Thm 1, Lemma 2, Thm 3, Thm 4, \dots
+\theoremstyle{definition}
+\newtheorem{deff}{Definición} % the star prevents numbering
+
+% Remarks
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+\newtheorem{ejj}{ Ejercicio}
+\newtheorem*{ej}{  \color{orange!65!black} Ejemplo}
+\newtheorem{preg}{Pregunta}
+
+%Comandos útiles.
+\newcommand\RP{\mathbb{RP}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\Om}{\Omega}
+\newcommand{\A}{\mathcal A}
+\newcommand\ol{\overline}
+\newcommand{\blue}{\textcolor{chulo}}
+\newcommand{\red}{\textcolor{rojo}}
+\newcommand{\Gg}{\mathfrak g}
+\newcommand{\SL}{SL_2(\mathbb Z)}
+\newcommand{\stab}{\text{Stab}}
+%%%%%%%%%%%%%%  PAGE SETUP %%%%%%%%%%%%%%%%%
+% LaTeX has big default margins
+% The following sets them to 1in
+
+%opening
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{Apuntes tesis.} % Left Header
+\rhead{\thepage} % Right Header
+
+\usepackage{subfiles} % Best loaded last in the preamble
+
+\title{\color{red!55!black} Resumen de geometría proyectiva.}
+
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+%\subfile{cuadricas}
+%\subfile{proyectiva}	
+%\subfile{curvas}	
+%\subfile{superficies}	
+%\subfile{riemanniana}
+	
+\end{document}	

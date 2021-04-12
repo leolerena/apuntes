@@ -1,0 +1,254 @@
+% !TeX root = final.tex
+\documentclass[13pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{geometry}\geometry{margin=1in}
+\usepackage{amsmath,amsfonts,amsthm,amssymb,mathtools,sectsty}
+\pagenumbering{gobble}
+\usepackage{subcaption}
+\usepackage{graphicx}
+\usepackage[pdftex,dvipsnames]{xcolor}
+\usepackage{xargs}
+\usepackage{verbatim}
+
+\usepackage{hyperref}
+% Para modificar el estilo de las referencias
+\hypersetup{
+	colorlinks,
+	linkcolor={astral},
+	citecolor={blue!50!black},
+	urlcolor={blue!80!black}
+}
+\definecolor{astral}{RGB}{46,116,181}
+\colorlet{chulo}{blue!70!purple}
+\colorlet{rojo}{red!65!black}
+
+
+
+
+\subsectionfont{\color{astral!60!black} }
+\sectionfont{\color{astral!50!black} }
+\usepackage{mathpazo}
+\usepackage{amssymb}
+\usepackage{eufrak}
+\usepackage{tikz-cd}
+\usepackage{tcolorbox}
+\usepackage{thmtools}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=tiny]{todonotes}
+\newcommandx{\improvement}[2][1=]{\todo[linecolor=Plum,backgroundcolor=Plum!25,bordercolor=Plum,#1]{#2}}
+
+%%%%%%%%%%%%%  THEOREMS  %%%%%%%%%%%%%%%%%
+% Let's define some theorem environments
+% To use later in the paper
+\theoremstyle{plain} % other options: definition, remark
+\newtheorem{teo}{\color{rojo} Teorema}
+\newtheorem{prop}[teo]{\color{rojo} Proposición}
+\newtheorem{lema}[teo]{\color{rojo} Lema}
+\newtheorem{coro}[teo]{\color{rojo} Corolario}
+% By including [theorem], the lemma follows the numbering of theorem
+% e.g. Thm 1, Lemma 2, Thm 3, Thm 4, \dots
+\theoremstyle{definition}
+\newtheorem{deff}{Definición} % the star prevents numbering
+
+% Remarks
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+\newtheorem{ejj}{ Ejercicio}
+\newtheorem*{ej}{  \color{orange!65!black} Ejemplo}
+\newtheorem{preg}{Pregunta}
+
+%Comandos útiles.
+\newcommand\RP{\mathbb{RP}}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\ti}{\tilde}
+\newcommand{\RR}{\mathbb R}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\ZZ}{\mathbb Z}
+\newcommand{\Om}{\Omega}
+\newcommand{\A}{\mathcal A}
+\newcommand\ol{\overline}
+\newcommand{\blue}{\textcolor{chulo}}
+\newcommand{\red}{\textcolor{rojo}}
+\newcommand{\Gg}{\mathfrak g}
+\newcommand{\SL}{SL_2(\mathbb Z)}
+\newcommand{\stab}{\text{Stab}}
+%%%%%%%%%%%%%%  PAGE SETUP %%%%%%%%%%%%%%%%%
+% LaTeX has big default margins
+% The following sets them to 1in
+
+%opening
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\lhead{} % Left Header
+\rhead{\thepage} % Right Header
+
+
+\title{\color{red!55!black} Notas matemáticas.}
+	\makeindex
+\date{}
+
+
+
+
+\begin{document}
+	\begin{abstract}
+		\begin{quote}
+			\textit{I enjoy trying to rethink basic facts that I learned some time ago, and attempting to express them in clear terms. Typically when I learned things from textbooks and classes, they seemed technical and complicated. Unless I go over and rethink them, my memory gradually decays, making unjustified simplifications and unfeasible shortcuts. I gain something by trying to rethink and express it, trying not to resort too much to citing authorities or my intangible belief system of what is well-known.}
+			
+			-William P Thurston.
+		\end{quote}	
+	
+		\begin{quote}	
+			\textit{When one is truly interested in a specific question, there is usually very little in the existing literature which is relevant. This means you are on your own.}
+			
+			-J. P. Serre.
+		\end{quote}
+	
+		\begin{quote}
+			\textit{Research is out of question before I have swallowed a mountain of new things.}
+			
+			- A. Grothendieck.
+		\end{quote}
+	
+		\begin{quote}
+			\textit{If something is worth doing, it's worth doing it badly.}
+			
+			- Herbert A. Simon.
+		\end{quote}
+		
+	\end{abstract}
+	
+	\maketitle
+	{\color{blue}{\tableofcontents}}
+
+	
+	\section{Helly meets Garside and Artin (JINGYIN HUANG AND DAMIAN OSAJDA)}
+	
+	En esta sección voy a anotar algunos apuntes sobre el paper de Osjada;
+	
+	\url{http://www.math.uni.wroc.pl/~dosaj/trav/Helly_Artin_Garside.pdf}
+	
+	\subsection{Objetivo del paper.}
+	
+	La idea principal del paper es demostrar el siguiente resultado:
+	
+	\begin{teo}
+		Los grupos Garside débiles de tipo finito y los grupos de Artin de tipo FC son Helly.
+	\end{teo}
+	
+	Para eso necesitamos entender qué son los grupos Helly.
+	
+	\begin{deff}
+		Una familia de conjuntos tiene la \blue{prop Helly} si la intersección de a pares es no vacía implica que la intersección de toda la familia es no vacía.
+	\end{deff}
+	
+	Un espacio métrico geodésico se dice \blue{inyectivo} si las bolas cerradas tienen la propiedad Helly. Analogamente lo podemos pensar para un grafo, que se los conoce como \blue{grafos de Helly}. Un grupo que actúa de manera geométrica sobre estos grafos se lo llama un \blue{grupo de Helly}.
+	
+	\subsection{Apuntes generales.}
+	
+	En esta sección anoto varias definiciones y propiedades interesantes que no sabía sobre los objetos que vamos a trabajar.
+	
+	\subsubsection{Grupos de Artin y de Coxeter.}
+	
+	Dado $\Gamma$ un grafo podemos considerar $V\Gamma$ sus vértices, un número $n>1$ en cada eje distinto y a la sig presentación de un grupo:
+	\[
+	A_\Gamma = \{ s_i \in V\Gamma | s_is_j \dots = s_j s_i \dots  \}
+	\]
+	si $s_i, s_j$ son los puntos terminales de un eje. A esta flia de grupos los denotamos grupos de \blue{Artin}. De manera similar nos podemos construir al sig grupo
+	\[
+	W_\Gamma = \{ s_i \in V\Gamma | (s_i)^2 = 1, (s_is_j)^{n_ij}=1 \}
+	\]
+	que llamaremos el grupo de \blue{Coxeter} del grafo $\Gamma$. Notemos que en particular tenemos un cociente
+	\[
+	q: A_\Gamma \to W_\Gamma.
+	\]
+	
+	Recordamos que un \blue{reticulado } es un poset que tiene una estructura extra. Esto es que cada par ${a,b}$ tiene un join que es una cota superior ínfima y un meet que es una cota inferior superior. Lo interesante que notamos es que los reticulados tienen la prop Helly si consideramos a los intervalos como los cerrados que se intersecan.
+	
+	Dicho esto podemos considerar el orden natural sobre los grupos de Coxeter y de Artin i.e $x \le y$ si existe $w$ tal que $x = wy$. En cierta manera cuanto más cerca de los generadores estás, más chico sos. De esta manera tenemos el siguiente resultado que requiere demostración no trivial,
+	
+	\begin{teo}
+		$(W_\Gamma, \le)$ y $(A_\Gamma, \le)$ son reticulados.
+	\end{teo}
+	
+	Decimos que un subgrafo es \blue{full} si dos vértices están conectados sii están conectados en el grafo más grande. En particular tenemos la siguiente propiedad simpática (o sea relacionada con la convexidad)
+	
+	\begin{teo}
+		$\Gamma' \subset \Gamma$ grafo full, $X' \to X$ embedding de grafos de Cayley de los grupos de Artin correspondientes a cada grafo. Entonces $X'$ es convexo en $X$ i.e toda geodésica entre puntos de $X'$ está contenida en $X'$.
+	\end{teo}
+	
+	Una definiciones importantes que vamos a usar más en adelante son las siguientes. 
+	
+	Si $W_\Gamma$ es finito, decimos que $\Gamma$ es \blue{esférico}. A su vez si todo subgrafo completo de $\Gamma$ es esférico decimos que $A_\Gamma$ es de tipo \blue{FC}.
+	
+	
+	\subsubsection{Complejos de Davis y de Salvetti.}
+	
+	Vamos a construir complejos correspondientes a cada tipo de grupo.
+	
+	Para los grupos de Coxeter vamos a considerar el poset de cosets de subgrupos esféricos dado por la inclusión. Miramos su realización geométrica $\Delta_\Gamma$. A este complejo lo achicamos tomando como nuevas celdas los subcomplejos que estaban dominados (los que eran cadenas anteriormente) para tener el \blue{complejo de Davis}. 
+	
+	Esta construcción no me queda del todo claro y estoy obviando algunos detalles en la elección de los subgrupos de los cuales formás el poset. Lo importante es que estos subgrupos tiene la propiedad Helly que tanto nos interesa.
+	
+	Una interpretación más simpática de esto ocurre cuando el grupo de Coxeter es finito, en tal caso actúa ortogonalmente sobre $\mathbb E^n$. Sea $p \in \mathbb E^n$ Definimos a $D_\Gamma$ como la cerradura convexa de los puntos trasladados de $p$ e históricamente se lo denota \blue{celda de Coxeter}. Resulta que el $1-$esqueleto de esta celda es el grafo de Cayley si nos olvidamos las orientaciones.
+	
+	Hagamos lo mismo para los grupos de Artin. Para construir al \blue{complejo de Salvetti} lo hacemos de manera inductiva. Primero consideremos al 2-complejo de la presentación del grupo $A_\Gamma$. Ahora si tenemos construído el $(n-1)-$esqueleto lo que hacemos es tomar por cada subgrafo $\Gamma'$ esférico con $n$ vértices una celda $D_\Gamma'$ de manera que se pegue bien con los del otro esqueleto.
+	
+	En particular si tomamos el rev. universal $X_\Gamma$ vemos que tiene como 1-esqueleto al grafo de Cayley de $A_\Gamma$. Finalmente tenemos el resultado,
+	\begin{teo}
+		Existe proy $\pi: X_\Gamma \to D_\Gamma$ que es homeo en cada celda.
+ 	\end{teo}
+	
+	
+	\subsubsection{Grupos de Helly}
+	
+	Dado un grafo podemos considerar los cliques que son los subgrafos completos. De esta manera podemos armarnos un complejo tomando los cliques como celdas. Lo denotamos el \blue{clique complex}. A partir de los cliques maximales podemos definir la noción de \blue{clique Helly} que es local. Por otro lado tenemos la definición global de ser Helly. El sig resultado nos garantiza poder pasar de local a global.
+	
+	\begin{teo}
+		Sea $\Gamma$ un grafo simplicial tal que es finitamente clique Helly y su complejo de cliques es simplemente conexo, entonces $\Gamma$ es finitamente Helly.
+	\end{teo}
+	
+	Existe un resultado paralelo para espacios métricos inyectivos.
+	
+	Dado que queremos tener acciones geométricas sobre grafos de Helly lo que vamos a hacer es construirnos complejos tales que sean más fáciles de manejar y así llevarlo a su esqueleto que va a ser un grafo.
+	
+	Si $X$ es un complejo simplicial, $\{X_i\}$ una familia de subcomplejos full (es decir que no le faltan subcomplejos) que cubren a $X$, decimos que es un \blue{complejo celular de Helly} si satisface las sig condiciones:
+	\begin{itemize}
+		\item Las intersecciones son vacías o simplemente conexas.
+		\item La flia $\{X_i\}$ tiene la prop finita de Helly.
+		\item (Más técnica) Para cada triple de subcomplejos existe $X_0$ tal que 
+		\[
+		(X_1 \cap X_2) \cup (X_1 \cap X_3) \cup (X_3 \cap X_2) \subset X_0.
+		\]
+		
+	\end{itemize} 
+
+	Lo importante de esta construcción es que nos permite ver que si un grupo $G$ actúa de manera geométrica sobre un complejo de Helly simplemente conexo y localmente acotado, entonces es un grupo de Helly. Esto se debe a que actúa sobre el 1-esqueleto de un espacio que se obtiene del complejo ensanchandolo.
+	
+	
+	\subsubsection{Grupos de Artin y grafos de Helly.}
+	
+	Lo importante de la construcción de $X_\Gamma$ es que es tal que las colecciones finitas de celdas de Coxeter cumplen la propiedad Helly. Esto nos permite decir que en el caso que el grupo de Artin sea FC luego $X_\Gamma$ resulta ser un complejo de Helly localmente acotado. Como $A_\Gamma$ actúa sobre $X_\Gamma$ geométricamente (recordemos que su 1-esqueleto es su grafo de Cayley) resulta que es un grupo de tipo Helly. En particular se obtiene que $X_\Gamma$ es contráctil.
+	
+	\subsection{Comentarios.}
+	
+	Al paper lo leí por arriba para entender mejor lo que se iba a decir en el seminario de topología del 14/11/2019.
+	
+	Lo que entendí intuitivamente es que estos grupos que resultan ser Helly si vemos sus grafos de Cayley notamos que tienen propiedades similares a la propiedad de Helly para convexos en el espacio euclídeo. Quizá se podría ver a partir de estas propiedades como es deberían ser los grupos para entender de otra manera a los grupos Helly.
+	
+	Por otro lado varias de las herramientas que usa son interesantes.
+	
+	Me gustaría entender mucho más sobre la teoría topológica y combinatórica que hay de fondo de los grupos de Coxeter. Si bien tengo entendido surgen en las álgebras de Lie pero tomaron vida propia viendolas de esta manera más discreta. 
+	
+	No llegué a estudiar los grupos de Garside pero según lo que leí parecen ser de gran importancia así que eventualmente lo podría hacer.
+	
+	Para finalizar quería decir que está manera bien combinatórica de hacer topología algebraica me parece súper interesante así que trataré de leer más al respecto.
+	
+	
+	
+\end{document}
+
+
